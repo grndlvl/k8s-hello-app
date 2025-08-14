@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hello-api
+  name: hello-api
+  namespace: develop
+spec:
+  clusterIP: 10.98.180.6
+  clusterIPs:
+  - 10.98.180.6
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: 80-http
+    port: 80
+    targetPort: http
+  selector:
+    app: hello-api
