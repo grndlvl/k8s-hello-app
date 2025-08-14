@@ -45,6 +45,9 @@ items:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
+            envFrom:
+              - configMapRef:
+                  name: hello-api-config
         dnsPolicy: ClusterFirst
         restartPolicy: Always
         schedulerName: default-scheduler

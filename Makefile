@@ -9,8 +9,10 @@ start:
 	minikube start --cpus=2 --memory=4096
 build:
 	docker build app -t hello-api:develop
-	# Load the image into the minikube registry
-	minikube image load hello-api:develop
+	minikube kubectl -- -n develop scale deploy/hello-api --replicas 0
+	# Load the image into the minikube registry.
+	minikube image load hello-api:develop --overwrite
+	minikube kubectl -- -n develop scale deploy/hello-api --replicas 2
 redeploy:
 	minikube kubectl -- -n develop rollout restart deployment/hello-api
 	minikube kubectl -- -n develop rollout status deployment/hello-api
