@@ -67,6 +67,32 @@ minikube   Ready    control-plane   1m    v1.30.0
 
 ---
 
+## ⌨️ Using kubectl with Minikube
+
+By default, Minikube requires you to call `kubectl` like this:
+
+```bash
+minikube kubectl -- get pods -A
+```
+
+That gets tiresome quickly. To simplify, create a temporary alias:
+
+```bash
+alias kubectl="minikube kubectl --"
+```
+
+✅ This alias lasts only for your current terminal session. If you close the terminal, you’ll need to run it again.  
+If you don’t set the alias, just replace `kubectl` with `minikube kubectl --` in all commands in this tutorial.
+
+> 💡 Tip: To make the alias permanent, add it to your shell startup file (e.g. `~/.bashrc` or `~/.zshrc`):  
+> ```bash
+> echo 'alias kubectl="minikube kubectl --"' >> ~/.bashrc
+> source ~/.bashrc
+> ```  
+> Replace `~/.bashrc` with `~/.zshrc` if you’re using Zsh.
+
+---
+
 ## 🌐 Enable NGINX Ingress
 
 We’ll use an Ingress Controller to route external traffic into the cluster.  
