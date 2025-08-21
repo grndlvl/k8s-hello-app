@@ -74,4 +74,11 @@ Full step-by-step walkthrough lives in [docs/](./docs):
 ## 🙌 Why this project?
 
 Kubernetes can feel overwhelming. This repo gives you a **guided, repeatable workflow** that covers the 80% you’ll need for real-world apps — without cloud vendor lock-in or complex tooling.
+---
+
+## ⚠️ Disclaimer
+
+This project was created as a learning resource with the assistance of AI tools.  
+All code and documentation have been **reviewed and tested for accuracy**,  
+but it is intended **for educational purposes only** and is **not production-ready**.
 
