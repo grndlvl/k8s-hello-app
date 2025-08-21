@@ -47,13 +47,15 @@ Once deployed, open:
 
 ## 📸 Screenshots
 
-- ✅ `kubectl get hpa` showing scale-up  
-- 🌐 Browser showing `http://hello.local`  
-- 📦 `kubectl rollout status deployment/hello-app`  
+- ✅ `kubectl get hpa` showing scale-up
+![HPA Screenshot](./docs/images/hpa.png)
 
-![HPA Screenshot](./docs/images/hpa.png)  
-![Ingress Screenshot](./docs/images/ingress.png)  
+- 🌐 Browser showing `http://hello.local`
+
+
+- 📦 `kubectl rollout status deployment/hello-app` 
 ![Rollout Screenshot](./docs/images/rollout.png)  
+ 
 
 ---
 
