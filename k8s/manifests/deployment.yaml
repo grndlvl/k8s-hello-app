@@ -45,9 +45,15 @@ items:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: "100m"
+                memory: "128Mi"
             envFrom:
               - configMapRef:
                   name: hello-api-config
+              - secretRef:
+                  name: hello-api-secret
         dnsPolicy: ClusterFirst
         restartPolicy: Always
         schedulerName: default-scheduler
