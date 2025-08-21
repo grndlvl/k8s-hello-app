@@ -1,36 +1,25 @@
-.PHONY: install start build requirements apply
+# Makefile for Kubernetes Starter project
 
-requirements:
-	minikube addons enable ingress
-	minikube addons enable metrics-server
-app\:requirements:
-	python3 -m venv venv
-	. venv/bin/activate && cd ./app/ && pip install --upgrade pip && pip install -r requirements.txt
-app\:build:
-	docker build app -t hello-api:develop
-load-app:
-	minikube kubectl -- -n develop scale deploy/hello-api --replicas 0
-	# Load the image into the minikube registry.
-	minikube image load hello-api:develop --overwrite
-	minikube kubectl -- -n develop scale deploy/hello-api --replicas 2
-start:
-	minikube start --cpus=2 --memory=4096
-redeploy:
-	minikube kubectl -- -n develop rollout restart deployment/hello-api
-	minikube kubectl -- -n develop rollout status deployment/hello-api
-apply:
-	minikube kubectl -- apply -f k8s/namespace.yaml
-	minikube kubectl -- apply -f k8s/deployment.yaml
-	minikube kubectl -- apply -f k8s/service.yaml
-	minikube kubectl -- apply -f k8s/secret.yaml
-	minikube kubectl -- apply -f k8s/ingress.yaml
-tls:
-	openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-		-keyout .secrets/tls/hello.local.key -out .secrets/tls/hello.local.crt \
-		-subj "/CN=hello.local" \
-		-addext "subjectAltName=DNS:hello.local"
-	minikube kubectl -- -n develop delete secret hello-api-tls
-	minikube kubectl -- -n develop create secret tls hello-api-tls --key .secrets/tls/hello.local.key --cert .secrets/tls/hello.local.crt
-	minikube kubectl -- -n develop get secret hello-api-tls -o yaml | kubectl neat > .secrets/tls-secret.yaml
-serve:
-	minikube kubectl -- -n develop port-forward service/hello-api 8080:80
+APP_NAME=hello-api
+NAMESPACE=hello
+IMAGE_TAG=1.0
+
+dev-up:
+	docker build -t $(APP_NAME):$(IMAGE_TAG) ./app
+	minikube image load $(APP_NAME):$(IMAGE_TAG)
+	kubectl apply -f k8s/manifests
+
+test-load:
+	kubectl run load-generator \
+		--rm -i --tty \
+		--image=busybox \
+		--restart=Never \
+		-- /bin/sh -c "while true; do wget -q -O- http://$(APP_NAME).hello.svc.cluster.local/; done"
+
+status:
+	kubectl get pods -o wide
+	kubectl get svc
+	kubectl get hpa
+
+down:
+	kubectl delete -f k8s/manifests || true

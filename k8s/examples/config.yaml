@@ -1,8 +1,0 @@
-apiVersion: v1
-data:
-  APP_MESSAGE: Hello from ConfigMap!
-  APP_MODE: develop
-kind: ConfigMap
-metadata:
-  name: hello-api-config
-  namespace: develop
