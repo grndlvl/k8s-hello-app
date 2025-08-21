@@ -1,8 +1,8 @@
-# k8s-hello-app – Kubernetes Beginner Project
+# Kubernetes Starter: Ingress + Probes + Autoscaling
 
-Welcome! 🎉 This project is designed to help you get hands-on experience with Kubernetes by building, deploying, and operating a simple web app in a local environment.  
+Welcome! 🎉 This project (repo: **`k8s-hello-app`**) is a hands-on starter for learning Kubernetes fundamentals by deploying a small FastAPI “Hello World” service (`hello.local`) in a local minikube cluster.  
 
-Think of it as a guided “dry run” -- you’ll practice the most important Kubernetes concepts without needing a cloud account or production setup. By the end, you’ll have confidence running apps with Kubernetes basics like deployments, services, ingress, scaling, and more.
+You’ll practice the most important Kubernetes concepts — Deployments, Services, Ingress, ConfigMaps, Secrets, resource limits, and autoscaling — in a safe, local environment. By the end, you’ll have confidence running and operating a real-world style workload in Kubernetes.
 
 ---
 
