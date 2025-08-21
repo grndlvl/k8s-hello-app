@@ -30,32 +30,42 @@ Make sure you have these installed:
 
 ## 🏃 Quick start
 
+Clone the repo:
+
 ```bash
-make dev-up       # builds image, starts minikube, applies manifests
-make test-load    # runs load to trigger HPA
-make status       # shows pods, svc, hpa
-make down         # cleanup
+git clone https://github.com/grndlvl/k8s-hello-app.git
+cd k8s-hello-app
 ```
 
-Once deployed, open:
+Start by reading the overview:
 
-- App: [http://hello.local](http://hello.local)  
-- FastAPI Docs: [http://hello.local/docs](http://hello.local/docs)  
-- ReDoc: [http://hello.local/redoc](http://hello.local/redoc)  
+```bash
+open docs/00-overview.md
+```
+
+When you’re ready to begin hands-on, check out the first step:
+
+```bash
+git checkout step-01-prereqs
+```
+
+Then follow [docs/01-prereqs-setup.md](./docs/01-prereqs-setup.md).  
+Each doc ends with a **⏭️ Next Step** footer telling you which tag to checkout next.
 
 ---
 
 ## 📸 Screenshots
 
-- ✅ `kubectl get hpa` showing scale-up
-![HPA Screenshot](./docs/images/hpa.png)
+- ✅ `kubectl get hpa` showing scale-up  
+  ![HPA Screenshot](./docs/images/hpa.png)
 
-- 🌐 Curl showing `https://hello.local`
-![Ingress Screenshot](./docs/images/ingress.png)
+- 🌐 Curl showing `https://hello.local`  
+  ![Ingress Screenshot](./docs/images/ingress.png)
 
+- 📦 `kubectl rollout status deployment/hello-app`  
+  ![Rollout Screenshot](./docs/images/rollout.png)
 
-- 📦 `kubectl rollout status deployment/hello-app` 
-![Rollout Screenshot](./docs/images/rollout.png)
+---
 
 ## 🎬 Capstone Demo
 
@@ -63,18 +73,41 @@ See the whole project in action — from deploying the app, checking Ingress,
 and then watching the Horizontal Pod Autoscaler scale the pods under load:
 
 ![Project Capstone Demo](./docs/images/k8s-instructional-capstone.gif)
- 
+
 ---
 
 ## 📚 Documentation
 
 Full step-by-step walkthrough lives in [docs/](./docs):
 
-- [00-overview.md](./docs/00-overview.md) – project goals, architecture, repo map **(you are here)**
+- [00-overview.md](./docs/00-overview.md) – project goals, architecture, repo map  
 - [01-prereqs-setup.md](./docs/01-prereqs-setup.md) – install and start minikube  
 - [02-app-container.md](./docs/02-app-container.md) – build and run the FastAPI app  
 - [03-k8s-deploy.md](./docs/03-k8s-deploy.md) – deploy the app into Kubernetes  
-- …and more through security, troubleshooting, and FAQ.  
+- [04-configmap-secret.md](./docs/04-configmap-secret.md) – inject config & secrets  
+- [05-ingress-tls.md](./docs/05-ingress-tls.md) – ingress with TLS  
+- [06-hpa-scaling.md](./docs/06-hpa-scaling.md) – autoscaling with HPA  
+- [07-security-basics.md](./docs/07-security-basics.md) – pod/container hardening  
+- [08-troubleshooting.md](./docs/08-troubleshooting.md) – common issues  
+- [09-runbook-ops.md](./docs/09-runbook-ops.md) – ops runbook  
+- [10-faq.md](./docs/10-faq.md) – frequently asked questions
+
+---
+
+## 🌿 Tutorial Tags
+
+Each step of the tutorial is published as a **git tag**.  
+The `main` branch contains the **final, complete version** of the project.
+
+- `step-01-prereqs` → environment setup  
+- `step-02-app-container` → FastAPI app + Dockerfile  
+- `step-03-k8s-deploy` → namespace, deployment, service  
+- `step-04-configmap-secret` → environment variables & secrets  
+- `step-05-ingress-tls` → ingress with TLS  
+- `step-06-hpa-scaling` → autoscaling with HPA  
+- `step-07-security-basics` → pod/container hardening  
+
+👉 Use the **⏭️ Next Step** footer in each doc to know which tag to checkout next.
 
 ---
 
@@ -86,5 +119,5 @@ Kubernetes can feel overwhelming. This repo gives you a **guided, repeatable wor
 
 ## ⚠️ Disclaimer
 
-This project was created as a learning resource with the assistance of AI tools.  All code and documentation have been **reviewed and tested for accuracy**, but it is intended **for educational purposes only** and is **not production-ready**.
-
+This project was created as a learning resource with the assistance of AI tools.  
+All code and documentation have been **reviewed and tested for accuracy**, but it is intended **for educational purposes only** and is **not production-ready**.

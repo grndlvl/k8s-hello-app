@@ -61,16 +61,14 @@ This project uses:
 
 ```mermaid
 flowchart TB
-  %% Title (no border, no edges)
   Title["FastAPI Application in Kubernetes<br/>Kubernetes Cluster"]
   classDef titleNode fill:none,stroke:none,color:#333,font-weight:bold;
   class Title titleNode
 
-  %% Main diagram below the title
   subgraph Cluster[Kubernetes Cluster]
     direction LR
 
-    subgraph NS[Namespace: develop]
+    subgraph NS[Namespace: hello]
       style NS fill:#eef6ff,stroke:#6ea8fe,stroke-width:1px
 
       Ingress["Ingress (NGINX)"];
@@ -127,49 +125,56 @@ Here’s how the repo is organized:
 
 ```
 ├── app/ # FastAPI demo application
-│ ├── Dockerfile # Container build instructions
-│ ├── main.py # FastAPI entrypoint
-│ └── requirements.txt # Python dependencies
+│   ├── Dockerfile
+│   ├── main.py
+│   └── requirements.txt
 │
 ├── docs/ # Step-by-step tutorial docs (follow in order)
-│ ├── 00-overview.md
-│ ├── 01-prereqs-setup.md
-│ ├── 02-app-container.md
-│ ├── 03-k8s-deploy.md
-│ ├── 04-configmap-secret.md
-│ ├── 05-ingress-tls.md
-│ ├── 06-hpa-scaling.md
-│ ├── 07-security-basics.md
-│ ├── 08-troubleshooting.md
-│ ├── 09-runbook-ops.md
-│ ├── 10-faq.md
-│ └── architecture-chart.mermaid # Text-based diagram (Mermaid)
+│   ├── 00-overview.md
+│   ├── 01-prereqs-setup.md
+│   ├── 02-app-container.md
+│   ├── 03-k8s-deploy.md
+│   ├── 04-configmap-secret.md
+│   ├── 05-ingress-tls.md
+│   ├── 06-hpa-scaling.md
+│   ├── 07-security-basics.md
+│   ├── 08-troubleshooting.md
+│   ├── 09-runbook-ops.md
+│   ├── 10-faq.md
+│   └── images/
 │
 ├── k8s/
-│ ├── examples/ # Example YAMLs (safe dummy values)
-│ │ ├── config.yaml
-│ │ ├── secret.yaml
-│ │ └── tls-secret.yaml
-│ │
-│ └── manifests/ # Kubernetes manifests for the app
-│ ├── deployment.yaml
-│ ├── hpa.yaml
-│ ├── ingress.yaml
-│ ├── namespace.yaml
-│ └── service.yaml
+│   └── manifests/
+│       ├── deployment.yaml
+│       ├── hpa.yaml
+│       ├── ingress.yaml
+│       ├── namespace.yaml
+│       └── service.yaml
 │
-├── Makefile # Shortcut commands for build/deploy
-└── README.md # Quick project introduction
+├── Makefile
+└── README.md
 ```
 
-- **`app/`** – the FastAPI service you’ll containerize.  
-- **`docs/`** – the tutorial, written step by step (read in order).  
-- **`k8s/examples/`** – example configs with demo-safe values.  
-- **`k8s/manifests/`** – the real manifests you’ll apply to Kubernetes.  
-- **`Makefile`** – handy shortcuts (`make build`, `make deploy`, etc.).  
-- **`README.md`** – a quick start pointer to this tutorial.
+---
 
-Each step builds on the previous one -- follow them in order for best results.  
+## 🔀 Following Along
+
+Each step in this tutorial is published as a **git tag**.  
+The `main` branch contains the **final completed project**.
+
+To get started, check out the first tag:
+
+```bash
+git checkout step-01-prereqs
+```
+
+From there, follow [01-prereqs-setup.md](01-prereqs-setup.md).  
+Each doc ends with a **⏭️ Next Step** footer telling you which tag to checkout next.
+
+> 💡 You can always see available steps with:
+> ```bash
+> git tag -l "step-*"
+> ```
 
 ---
 
@@ -198,4 +203,11 @@ By the end of this tutorial, your app will look like this in Kubernetes:
 
 ---
 
-👉 Next step: [01-prereqs-setup.md](01-prereqs-setup.md)  
+## ⏭️ Next Step
+
+Continue to [01-prereqs-setup.md](01-prereqs-setup.md)  
+and check out the tag:
+
+```bash
+git checkout step-01-prereqs
+```
