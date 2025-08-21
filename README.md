@@ -80,7 +80,5 @@ Kubernetes can feel overwhelming. This repo gives you a **guided, repeatable wor
 
 ## ⚠️ Disclaimer
 
-This project was created as a learning resource with the assistance of AI tools.  
-All code and documentation have been **reviewed and tested for accuracy**,  
-but it is intended **for educational purposes only** and is **not production-ready**.
+This project was created as a learning resource with the assistance of AI tools.  All code and documentation have been **reviewed and tested for accuracy**, but it is intended **for educational purposes only** and is **not production-ready**.
 
