@@ -1,0 +1,49 @@
+flowchart TB
+  %% Title (no border, no edges)
+  Title["FastAPI Application in Kubernetes<br/>Kubernetes Cluster"]
+  classDef titleNode fill:none,stroke:none,color:#333,font-weight:bold;
+  class Title titleNode
+
+  %% Main diagram below the title
+  subgraph Cluster[Kubernetes Cluster]
+    direction LR
+
+    subgraph NS[Namespace: develop]
+      style NS fill:#eef6ff,stroke:#6ea8fe,stroke-width:1px
+
+      Ingress["Ingress (NGINX)"];
+      Svc["Service (ClusterIP)"];
+      Deploy["Deployment: hello-api<br/>(replicas=2)<br/>image=hello-api:local (FastAPI)"];
+      Pod1(Pod: api-A);
+      Pod2(Pod: api-B);
+
+      CM[[ConfigMap: hello-app-config]];
+      Sec[[Secret: hello-app-secret]];
+      HPA{{"HPA (CPU target 60%)"}};
+      TLS[[Secret: example-tls]];
+
+      Ingress -->|"routes '/'"| Svc;
+      Svc --> Deploy;
+
+      Deploy --> Pod1;
+      Deploy --> Pod2;
+
+      CM -->|envFrom| Pod1;
+      CM -->|envFrom| Pod2;
+      Sec -->|envFrom| Pod1;
+      Sec -->|envFrom| Pod2;
+
+      HPA -. scales .-> Deploy;
+      TLS -. tls .-> Ingress;
+    end
+
+    NginxCtrl[NGINX Ingress Controller];
+    Metrics[Metrics Server];
+    CertMgr[cert-manager];
+
+    Ingress --- NginxCtrl;
+    HPA --- Metrics;
+    CertMgr -. issues .-> TLS;
+  end
+
+  Client[Browser @ hello-api.local] --> Ingress;
