@@ -55,9 +55,15 @@ Once deployed, open:
 
 
 - 📦 `kubectl rollout status deployment/hello-app` 
-![Rollout Screenshot](./docs/images/rollout.png)  
- 
+![Rollout Screenshot](./docs/images/rollout.png)
 
+## 🎬 Capstone Demo
+
+See the whole project in action — from deploying the app, checking Ingress,  
+and then watching the Horizontal Pod Autoscaler scale the pods under load:
+
+![Project Capstone Demo](./docs/images/k8s-instructional-capstone.gif)
+ 
 ---
 
 ## 📚 Documentation
