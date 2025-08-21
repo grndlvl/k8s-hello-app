@@ -1,4 +1,4 @@
-# Kubernetes Beginner Project – Dry Run
+# k8s-hello-app – Kubernetes Beginner Project
 
 Welcome! 🎉 This project is designed to help you get hands-on experience with Kubernetes by building, deploying, and operating a simple web app in a local environment.  
 
