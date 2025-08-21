@@ -190,7 +190,7 @@ This project is a safe, local sandbox -- experiment as much as you like!
 
 By the end of this tutorial, your app will look like this in Kubernetes:
 
-![Capstone Demo](./images/capstone.gif)
+![Capstone Demo](./images/k8s-instructional-capstone.gif)
 
 - App reachable at **http://hello.local**  
 - Ingress routing requests to your pods  
