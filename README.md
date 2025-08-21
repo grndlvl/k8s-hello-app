@@ -80,7 +80,7 @@ and then watching the Horizontal Pod Autoscaler scale the pods under load:
 
 Full step-by-step walkthrough lives in [docs/](./docs):
 
-- [00-overview.md](./docs/00-overview.md) – project goals, architecture, repo map  
+- [00-overview.md](./docs/00-overview.md) – project goals, architecture, repo map **👈 start here**
 - [01-prereqs-setup.md](./docs/01-prereqs-setup.md) – install and start minikube  
 - [02-app-container.md](./docs/02-app-container.md) – build and run the FastAPI app  
 - [03-k8s-deploy.md](./docs/03-k8s-deploy.md) – deploy the app into Kubernetes  
@@ -99,7 +99,6 @@ Full step-by-step walkthrough lives in [docs/](./docs):
 Each step of the tutorial is published as a **git tag**.  
 The `main` branch contains the **final, complete version** of the project.
 
-- `step-01-prereqs` → environment setup  
 - `step-02-app-container` → FastAPI app + Dockerfile  
 - `step-03-k8s-deploy` → namespace, deployment, service  
 - `step-04-configmap-secret` → environment variables & secrets  
@@ -108,6 +107,9 @@ The `main` branch contains the **final, complete version** of the project.
 - `step-07-security-basics` → pod/container hardening  
 
 👉 Use the **⏭️ Next Step** footer in each doc to know which tag to checkout next.
+
+👉 The first tag you’ll check out is **`step-02-app-container`**.  
+Stay on `main` for steps 00 and 01.
 
 ---
 

@@ -42,6 +42,39 @@ Install the following tools:
 
 ---
 
+## 🔧 Make `kubectl` Work with minikube
+
+When using minikube, the `kubectl` binary on your system may not point to the cluster.  
+Instead of typing `minikube kubectl -- get pods` each time, you can map `kubectl` directly:
+
+```bash
+alias kubectl="minikube kubectl --"
+```
+
+Now a simple:
+
+```bash
+kubectl get pods -A
+```
+
+will work as expected.  
+
+👉 To make this persistent across shells, add the alias to your shell config:
+
+```bash
+echo 'alias kubectl="minikube kubectl --"' >> ~/.bashrc
+# or, if using zsh:
+echo 'alias kubectl="minikube kubectl --"' >> ~/.zshrc
+```
+
+Reload your shell and test:
+
+```bash
+kubectl get ns
+```
+
+---
+
 ## 🚀 Start minikube
 
 Launch your local Kubernetes cluster with:
@@ -64,32 +97,6 @@ Expected output (your node name may differ):
 NAME       STATUS   ROLES           AGE   VERSION
 minikube   Ready    control-plane   1m    v1.30.0
 ```
-
----
-
-## ⌨️ Using kubectl with Minikube
-
-By default, Minikube requires you to call `kubectl` like this:
-
-```bash
-minikube kubectl -- get pods -A
-```
-
-That gets tiresome quickly. To simplify, create a temporary alias:
-
-```bash
-alias kubectl="minikube kubectl --"
-```
-
-✅ This alias lasts only for your current terminal session. If you close the terminal, you’ll need to run it again.  
-If you don’t set the alias, just replace `kubectl` with `minikube kubectl --` in all commands in this tutorial.
-
-> 💡 Tip: To make the alias permanent, add it to your shell startup file (e.g. `~/.bashrc` or `~/.zshrc`):  
-> ```bash
-> echo 'alias kubectl="minikube kubectl --"' >> ~/.bashrc
-> source ~/.bashrc
-> ```  
-> Replace `~/.bashrc` with `~/.zshrc` if you’re using Zsh.
 
 ---
 
@@ -150,4 +157,9 @@ You should see it resolve to your minikube IP.
 
 ---
 
-✅ You’re all set! Next: [02-app-container.md](02-app-container.md) to build the FastAPI app container.
+## ⏭️ Next Step
+
+Continue to [02-app-container.md](02-app-container.md).
+
+👉 You’re still on `main`.  
+The first tag you’ll check out will be **`step-02-app-container`**.
