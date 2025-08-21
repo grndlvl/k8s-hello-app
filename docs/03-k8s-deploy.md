@@ -8,6 +8,8 @@ We’ll create:
 2. A **Deployment** for the app pods (with probes, security, resources)  
 3. A **Service** to expose the pods internally  
 
+> ℹ️ Reminder: If you didn’t set the `kubectl` alias in [01-prereqs-setup.md](01-prereqs-setup.md), replace every `kubectl` command here with `minikube kubectl --`.
+
 ---
 
 ## 🏷️ Step 1. Create a Namespace
@@ -121,6 +123,15 @@ kubectl rollout status deployment/hello-api
 
 - Kubernetes needs CPU/memory requests to schedule pods.  
 - The HPA later uses `requests.cpu` as the baseline for scaling. Without them, HPA can’t function properly.  
+- We’ll see HPA scaling in action in [06-hpa-scaling.md](06-hpa-scaling.md).
+
+---
+
+### 🔎 Why readiness & liveness probes?
+
+- **Readiness probe** ensures traffic is only sent to healthy pods.  
+- **Liveness probe** allows Kubernetes to restart a pod if it gets stuck.  
+These are critical for keeping your app reliable under load.
 
 ---
 
@@ -197,9 +208,9 @@ kubectl rollout restart deployment/hello-api
 ```
 
 > ⚠️ Because we’re using `imagePullPolicy: Never`, Kubernetes will **only** use the image that’s inside minikube.
-> If you forget to reload, pods will still run the old version.> 
+> If you forget to reload, pods will still run the old version.  
 >
-> - **Best practice:** bump the tag each time (e.g., `hello-api:1.1`, `hello-api:2.0`) so you can safely load a new image without conflicts.  
+> - **Best practice:** **bump the tag each time** (e.g., `hello-api:1.1`, `hello-api:2.0`) so you can safely load a new image without conflicts.  
 > - **If you re-use the same tag** (e.g., rebuild `hello-api:1.0`), you must first remove the old image from minikube. But this only works if **no pods are currently running that image**:
 >   ```bash
 >   kubectl delete deployment hello-api
