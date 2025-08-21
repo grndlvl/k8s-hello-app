@@ -108,7 +108,7 @@ flowchart TB
     CertMgr -. issues .-> TLS;
   end
 
-  Client[Browser @ hello-api.local] --> Ingress;
+  Client[Browser @ hello.local] --> Ingress;
 ```
 
 ---
