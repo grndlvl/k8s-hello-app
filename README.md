@@ -47,8 +47,6 @@ Once deployed, open:
 
 ## 📸 Screenshots
 
-(coming soon — replace placeholders with your own screenshots)
-
 - ✅ `kubectl get hpa` showing scale-up  
 - 🌐 Browser showing `http://hello.local`  
 - 📦 `kubectl rollout status deployment/hello-app`  
