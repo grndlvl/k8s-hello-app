@@ -53,9 +53,9 @@ Once deployed, open:
 - 🌐 Browser showing `http://hello.local`  
 - 📦 `kubectl rollout status deployment/hello-app`  
 
-![HPA Screenshot](./images/hpa.png)  
-![Ingress Screenshot](./images/ingress.png)  
-![Rollout Screenshot](./images/rollout.png)  
+![HPA Screenshot](./docs/images/hpa.png)  
+![Ingress Screenshot](./docs/images/ingress.png)  
+![Rollout Screenshot](./docs/images/rollout.png)  
 
 ---
 
@@ -74,6 +74,7 @@ Full step-by-step walkthrough lives in [docs/](./docs):
 ## 🙌 Why this project?
 
 Kubernetes can feel overwhelming. This repo gives you a **guided, repeatable workflow** that covers the 80% you’ll need for real-world apps — without cloud vendor lock-in or complex tooling.
+
 ---
 
 ## ⚠️ Disclaimer
