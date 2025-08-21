@@ -30,27 +30,22 @@ Make sure you have these installed:
 
 ## 🏃 Quick start
 
-Clone the repo:
+Want to see the finished project right away?  
+Check out the final code and run it locally:
 
-```bash
-git clone https://github.com/grndlvl/k8s-hello-app.git
-cd k8s-hello-app
-```
+    git checkout main        # final version of the project
+    make dev-up              # builds image, starts minikube, applies manifests
+    make test-load           # runs load to trigger HPA
+    make status              # shows pods, svc, hpa
+    make down                # cleanup
 
-Start by reading the overview:
+Once deployed, open:
 
-```bash
-open docs/00-overview.md
-```
+- App: http://hello.local  
+- FastAPI Docs: http://hello.local/docs  
+- ReDoc: http://hello.local/redoc  
 
-When you’re ready to begin hands-on, check out the first step:
-
-```bash
-git checkout step-01-prereqs
-```
-
-Then follow [docs/01-prereqs-setup.md](./docs/01-prereqs-setup.md).  
-Each doc ends with a **⏭️ Next Step** footer telling you which tag to checkout next.
+👉 If you prefer to learn step-by-step, start with [00-overview.md](./docs/00-overview.md).
 
 ---
 
