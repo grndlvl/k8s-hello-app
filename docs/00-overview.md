@@ -186,4 +186,16 @@ This project is a safe, local sandbox -- experiment as much as you like!
 
 ---
 
+## 🎬 Capstone Preview
+
+By the end of this tutorial, your app will look like this in Kubernetes:
+
+![Capstone Demo](./images/capstone.gif)
+
+- App reachable at **http://hello.local**  
+- Ingress routing requests to your pods  
+- HPA automatically scaling from 2 → 5 replicas under load
+
+---
+
 👉 Next step: [01-prereqs-setup.md](01-prereqs-setup.md)  
