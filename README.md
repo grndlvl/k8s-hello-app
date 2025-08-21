@@ -70,7 +70,7 @@ and then watching the Horizontal Pod Autoscaler scale the pods under load:
 
 Full step-by-step walkthrough lives in [docs/](./docs):
 
-- [00-overview.md](./docs/00-overview.md) – project goals, architecture, repo map  
+- [00-overview.md](./docs/00-overview.md) – project goals, architecture, repo map **(you are here)**
 - [01-prereqs-setup.md](./docs/01-prereqs-setup.md) – install and start minikube  
 - [02-app-container.md](./docs/02-app-container.md) – build and run the FastAPI app  
 - [03-k8s-deploy.md](./docs/03-k8s-deploy.md) – deploy the app into Kubernetes  
