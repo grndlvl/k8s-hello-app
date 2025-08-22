@@ -30,6 +30,9 @@ class AppInfo(BaseModel):
     greeting: Greeting
     secrets: SecretInfo
 
+class Status(BaseModel):
+    status: str
+
 @app.get("/", response_model=AppInfo)
 def hello() -> AppInfo:
     greeting = Greeting(
@@ -50,11 +53,11 @@ def hello() -> AppInfo:
 
 @app.get("/healthz")
 def healthz():
-    return {"status": "ok"}
+    return Status(status="ok")
 
 @app.get("/livez")
-def livez():
-    return {"status": "alive"}
+def livez() -> Status:
+    return Status(status="alive")
 ```
 
 Key points:  
