@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-app-ingress
+  namespace: hello
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"  # allow HTTP before TLS is set up
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - hello.local
+      secretName: hello-app-tls
+  rules:
+  - host: hello.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hello-app
+            port:
+              number: 80
