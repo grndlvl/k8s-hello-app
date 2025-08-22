@@ -25,6 +25,27 @@ spec:
         imagePullPolicy: Never   # Always use the locally loaded image in minikube
         ports:
         - containerPort: 8080
+        env:
+        - name: APP_MESSAGE
+          valueFrom:
+            configMapKeyRef:
+              name: hello-app-config
+              key: APP_MESSAGE
+        - name: APP_MODE
+          valueFrom:
+            configMapKeyRef:
+              name: hello-app-config
+              key: APP_MODE
+        - name: SECRET_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: hello-app-secret
+              key: SECRET_API_KEY
+        - name: SECRET_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: hello-app-secret
+              key: SECRET_DB_PASSWORD
         # Container-level hardening
         securityContext:
           allowPrivilegeEscalation: false
