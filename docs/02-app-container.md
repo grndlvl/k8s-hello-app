@@ -154,7 +154,7 @@ hello-app   1.0   abc123def456   2 minutes ago   120MB
 Run the container in the foreground:
 
 ```bash
-docker run -p 8080:8080 --name hello-app hello-app:1.0
+docker run -p 8080:8080 hello-app:1.0
 ```
 
 You should see `uvicorn` logs streaming in the terminal.  
