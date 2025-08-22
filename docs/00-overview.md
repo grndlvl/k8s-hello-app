@@ -206,3 +206,6 @@ By the end of this tutorial, your app will look like this in Kubernetes:
 ## ⏭️ Next Step
 
 Continue to [01-prereqs-setup.md](01-prereqs-setup.md).
+
+💡 Tip: Make sure you’ve checked out the **`start` branch** if you’re following along from scratch.  
+The `main` branch contains the finished project, while `start` is your clean slate.
