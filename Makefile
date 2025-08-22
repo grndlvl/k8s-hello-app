@@ -1,6 +1,6 @@
 # Makefile for Kubernetes Starter project
 
-APP_NAME=hello-api
+APP_NAME=hello-app
 NAMESPACE=hello
 IMAGE_TAG=1.0
 

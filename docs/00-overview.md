@@ -73,7 +73,7 @@ flowchart TB
 
       Ingress["Ingress (NGINX)"];
       Svc["Service (ClusterIP)"];
-      Deploy["Deployment: hello-api<br/>(replicas=2)<br/>image=hello-api:local (FastAPI)"];
+      Deploy["Deployment: hello-app<br/>(replicas=2)<br/>image=hello-app:local (FastAPI)"];
       Pod1(Pod: api-A);
       Pod2(Pod: api-B);
 

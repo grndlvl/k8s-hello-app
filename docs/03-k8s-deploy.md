@@ -8,7 +8,7 @@ We’ll create:
 2. A **Deployment** for the app pods (with probes, security, resources)  
 3. A **Service** to expose the pods internally  
 
-> ℹ️ Reminder: If you didn’t set the `kubectl` alias in [01-prereqs-setup.md](01-prereqs-setup.md), replace every `kubectl` command here with `minikube kubectl --`.
+> ℹ️ Reminder: If you didn’t set the `kubectl` alias in [01-prereqs-setup.md](01-prereqs-setup.md#-make-kubectl-work-with-minikube), replace every `kubectl` command here with `minikube kubectl --`.
 
 ---
 
@@ -34,7 +34,7 @@ Set the namespace as the current context so all future commands default to it:
 
 ```bash
 kubectl config set-context --current --namespace=hello
-kubectl get ns
+kubectl config view --minify --output 'jsonpath={..namespace}'
 ```
 
 You should see `hello` listed and marked as active.
@@ -43,24 +43,24 @@ You should see `hello` listed and marked as active.
 
 ## 📦 Step 2. Create a Deployment
 
-A Deployment manages pods for us. We’ll run **2 replicas** of `hello-api` by default.
+A Deployment manages pods for us. We’ll run **2 replicas** of `hello-app` by default.
 
 ```yaml
 # k8s/manifests/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-api
+  name: hello-app
   namespace: hello
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: hello-api
+      app: hello-app
   template:
     metadata:
       labels:
-        app: hello-api
+        app: hello-app
     spec:
       # Pod-level security context
       securityContext:
@@ -68,8 +68,8 @@ spec:
         runAsGroup: 10001
         runAsNonRoot: true
       containers:
-      - name: hello-api
-        image: hello-api:1.0
+      - name: hello-app
+        image: hello-app:1.0
         imagePullPolicy: Never   # Always use the locally loaded image in minikube
         ports:
         - containerPort: 8080
@@ -106,7 +106,7 @@ Apply it:
 ```bash
 kubectl apply -f k8s/manifests/deployment.yaml
 kubectl get pods
-kubectl rollout status deployment/hello-api
+kubectl rollout status deployment/hello-app
 ```
 
 ---
@@ -144,11 +144,11 @@ A Service exposes pods internally in the cluster. We’ll use a **ClusterIP** se
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-api
+  name: hello-app
   namespace: hello
 spec:
   selector:
-    app: hello-api
+    app: hello-app
   ports:
     - port: 80
       targetPort: 8080
@@ -168,7 +168,7 @@ kubectl get svc
 Port-forward to test the service:
 
 ```bash
-kubectl port-forward svc/hello-api 8080:80
+kubectl port-forward svc/hello-app 8080:80
 ```
 
 Now open a new terminal and curl the endpoint:
@@ -184,7 +184,7 @@ Expected output (your pod name will vary):
   "greeting": {
     "message": "Hello from Kubernetes!!!",
     "env": "dev",
-    "pod_name": "hello-api-5f9d7c8d9c-xyz12"
+    "pod_name": "5f9d7c8d9c"
   },
   "secrets": {
     "api_key": "<unset>",
@@ -202,21 +202,21 @@ Stop port-forwarding with `Ctrl-C`.
 When you change `main.py` or rebuild the container, you’ll need to reload the image into minikube:
 
 ```bash
-docker build -t hello-api:1.0 ./app
-minikube image load hello-api:1.0
-kubectl rollout restart deployment/hello-api
+docker build -t hello-app:1.0 ./app
+minikube image load hello-app:1.0
+kubectl rollout restart deployment/hello-app
 ```
 
 > ⚠️ Because we’re using `imagePullPolicy: Never`, Kubernetes will **only** use the image that’s inside minikube.
 > If you forget to reload, pods will still run the old version.  
 >
-> - **Best practice:** **bump the tag each time** (e.g., `hello-api:1.1`, `hello-api:2.0`) so you can safely load a new image without conflicts.  
-> - **If you re-use the same tag** (e.g., rebuild `hello-api:1.0`), you must first remove the old image from minikube. But this only works if **no pods are currently running that image**:
+> - **Best practice:** **bump the tag each time** (e.g., `hello-app:1.1`, `hello-app:2.0`) so you can safely load a new image without conflicts.  
+> - **If you re-use the same tag** (e.g., rebuild `hello-app:1.0`), you must first remove the old image from minikube. But this only works if **no pods are currently running that image**:
 >   ```bash
->   kubectl delete deployment hello-api
->   minikube image rm hello-api:1.0
->   docker build -t hello-api:1.0 ./app
->   minikube image load hello-api:1.0
+>   kubectl delete deployment hello-app
+>   minikube image rm hello-app:1.0
+>   docker build -t hello-app:1.0 ./app
+>   minikube image load hello-app:1.0
 >   kubectl apply -f k8s/manifests/deployment.yaml
 >   ```
 >   If pods are still referencing the old image, minikube won’t let you remove it.

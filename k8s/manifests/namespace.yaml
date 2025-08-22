@@ -1,0 +1,5 @@
+# k8s/manifests/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hello
