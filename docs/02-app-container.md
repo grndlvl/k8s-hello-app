@@ -64,7 +64,7 @@ Key points:
 - Reads values from environment variables (`APP_MESSAGE`, `APP_MODE`, etc.).  
 - Returns both **greeting info** and **secrets info** (demo-safe).  
 - Provides `/healthz` and `/livez` endpoints for Kubernetes probes.  
-- Uses **Pydantic models** (`Greeting`, `SecretInfo`, `AppInfo`) so responses are strongly typed.  
+- Uses **Pydantic models** (`Greeting`, `SecretInfo`, `AppInfo`, `Status`) so responses are strongly typed.  
 
 > ⚠️ **Note:** Any time you change `main.py` (or anything in the `app/` directory), you must **rebuild the Docker image** and reload it into minikube before Kubernetes can run the updated code.  
 
