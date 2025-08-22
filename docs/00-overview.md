@@ -206,6 +206,3 @@ By the end of this tutorial, your app will look like this in Kubernetes:
 ## ⏭️ Next Step
 
 Continue to [01-prereqs-setup.md](01-prereqs-setup.md).
-
-👉 You’re still on `main`.  
-The first tag you’ll check out will be **`step-02-app-container`**.
