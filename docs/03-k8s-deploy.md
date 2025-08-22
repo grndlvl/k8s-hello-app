@@ -223,4 +223,9 @@ kubectl rollout restart deployment/hello-app
 
 ---
 
-✅ At this point, you have a working Deployment and Service in Kubernetes. Next we’ll configure environment variables using **ConfigMaps** and **Secrets**.
+## ⏭️ Next Step
+
+✅ At this point, you have a working Deployment and Service in Kubernetes.  
+
+Next, we’ll configure environment variables using **ConfigMaps** and **Secrets** to manage settings and sensitive data.  
+Continue to [04-configmap-secret.md](04-configmap-secret.md) to see how Kubernetes manages environment variables securely.
