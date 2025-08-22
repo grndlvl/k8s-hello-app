@@ -73,7 +73,11 @@ and then watching the Horizontal Pod Autoscaler scale the pods under load:
 
 ## 📚 Documentation
 
-Full step-by-step walkthrough lives in [docs/](./docs):
+The full step-by-step walkthrough lives in [docs/](./docs).  
+
+👉 To follow along from scratch, start from the `start` branch.  
+👉 To view the completed project, use `main`.  
+👉 Each step is also available as a git tag (see Tutorial Tags).
 
 - [00-overview.md](./docs/00-overview.md) – project goals, architecture, repo map **👈 start here**
 - [01-prereqs-setup.md](./docs/01-prereqs-setup.md) – install and start minikube  
@@ -91,9 +95,13 @@ Full step-by-step walkthrough lives in [docs/](./docs):
 
 ## 🌿 Tutorial Tags
 
-Each step of the tutorial is published as a **git tag**.  
-The `main` branch contains the **final, complete version** of the project.
+This repo has multiple ways to follow along:
 
+- **`start` branch** → clean slate to begin the tutorial from scratch  
+- **`main` branch** → finished project with all steps completed  
+- **step-XX tags** → optional shortcuts to jump to specific milestones  
+
+Tags (optional jump points):  
 - `step-02-app-container` → FastAPI app + Dockerfile  
 - `step-03-k8s-deploy` → namespace, deployment, service  
 - `step-04-configmap-secret` → environment variables & secrets  
@@ -101,10 +109,8 @@ The `main` branch contains the **final, complete version** of the project.
 - `step-06-hpa-scaling` → autoscaling with HPA  
 - `step-07-security-basics` → pod/container hardening  
 
-👉 Use the **⏭️ Next Step** footer in each doc to know which tag to checkout next.
-
-👉 The first tag you’ll check out is **`step-02-app-container`**.  
-Stay on `main` for steps 00 and 01.
+👉 By default, check out the `start` branch and follow the docs step by step.  
+👉 Use tags only if you want to **jump ahead** or **catch up** at a given step.
 
 ---
 
