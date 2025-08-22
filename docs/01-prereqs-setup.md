@@ -157,9 +157,10 @@ You should see it resolve to your minikube IP.
 
 ---
 
+---
+
 ## ⏭️ Next Step
 
-Continue to [02-app-container.md](02-app-container.md).
+Cluster is ready and Ingress is enabled. 🚀  
 
-👉 You’re still on `main`.  
-The first tag you’ll check out will be **`step-02-app-container`**.
+Continue to [02-app-container.md](02-app-container.md) where we’ll build and containerize the FastAPI app.
