@@ -187,11 +187,7 @@ Expected JSON from `/` (values will vary by environment):
 }
 ```
 
-When finished, return to the terminal running Docker and stop the container with:
-
-```
-Ctrl-C
-```
+Keep the container running and continue to Step 5.
 
 ---
 
@@ -210,8 +206,17 @@ You’ll see:
 - Data models (`Greeting`, `SecretInfo`, `AppInfo`) automatically documented.  
 - Clear request/response schemas — perfect for debugging and learning.
 
+Swagger UI
 ![Swagger UI Screenshot](./images/swagger-ui.png)  
+
+ReDoc
 ![ReDoc Screenshot](./images/redoc.png)  
+
+When finished, return to the terminal running Docker and stop the container with:
+
+```
+Ctrl-C
+```
 
 ---
 
