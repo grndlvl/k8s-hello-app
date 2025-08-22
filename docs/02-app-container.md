@@ -193,12 +193,6 @@ When finished, return to the terminal running Docker and stop the container with
 Ctrl-C
 ```
 
-Then clean up the container:
-
-```bash
-docker rm hello-app
-```
-
 ---
 
 ## 📚 Step 5. Explore FastAPI’s Built-in Docs
