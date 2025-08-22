@@ -274,5 +274,8 @@ flowchart LR
 
 ---
 
-✅ Your FastAPI app is now containerized and ready for Kubernetes.  
-Next: [03-k8s-deploy.md](03-k8s-deploy.md) to deploy the app into the cluster.
+## ⏭️ Next Step
+
+You’ve just built and containerized the FastAPI app. 🎉  
+
+Continue to [03-k8s-deploy.md](03-k8s-deploy.md) where we’ll deploy the app into Kubernetes
