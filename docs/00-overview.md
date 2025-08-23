@@ -159,19 +159,17 @@ Here’s how the repo is organized:
 
 ## 🔀 Following Along
 
-Each step in this tutorial is published as a **git tag**.
-The `main` branch contains the **final completed project**.
+This repo is structured to support both **learn by doing** and **reference only** styles.
 
-To get started, check out the first tag:
+- The **`start` branch** is where you should begin if you want to build along step by step.
+- The **`main` branch** contains the **final completed project**.
+- Each step is also published as a **git tag**, so you can check the code at any stage.
 
-```bash
-git checkout step-01-prereqs
-```
+👉 Recommended:
+Stay on the `start` branch and follow the docs in order.
+Only use tags if you want to compare your work with a reference snapshot.
 
-From there, follow [01-prereqs-setup.md](01-prereqs-setup.md).
-Each doc ends with a **⏭️ Next Step** footer telling you which tag to checkout next.
-
-> 💡 You can always see available steps with:
+> 💡 To see available step tags:
 > ```bash
 > git tag -l "step-*"
 > ```
@@ -197,7 +195,7 @@ By the end of this tutorial, your app will look like this in Kubernetes:
 
 ![Capstone Demo](./images/k8s-instructional-capstone.gif)
 
-- App reachable at **http://hello.local**
+- App reachable at **https://hello.local**
 - Ingress routing requests to your pods
 - HPA automatically scaling from 2 → 5 replicas under load
 

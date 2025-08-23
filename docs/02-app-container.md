@@ -161,7 +161,7 @@ docker run -p 8080:8080 hello-app:1.0
 ```
 
 You should see `uvicorn` logs streaming in the terminal.
-Leave it running while you test in another terminal.
+Leave it running while you test in another terminal or a browser.
 
 Verify the endpoints:
 
@@ -203,13 +203,13 @@ Open these URLs in your browser:
 
 You’ll see:
 - A **live playground** where you can try requests without `curl`.
-- Data models (`Greeting`, `SecretInfo`, `AppInfo`) automatically documented.
+- Data models (`Greeting`, `SecretInfo`, `AppInfo`, `Status`) automatically documented.
 - Clear request/response schemas — perfect for debugging and learning.
 
-Swagger UI
+[Swagger UI](https://swagger.io/tools/swagger-ui/)
 ![Swagger UI Screenshot](./images/swagger-ui.png)
 
-ReDoc
+[ReDoc](https://github.com/Redocly/redoc)
 ![ReDoc Screenshot](./images/redoc.png)
 
 When finished, return to the terminal running Docker and stop the container with:
@@ -250,16 +250,28 @@ minikube image ls | grep hello-app
 When working with Kubernetes, your development loop looks like this:
 
 1. **Edit code** → change `main.py` or other files.
-2. **Rebuild image** → `docker build -t hello-app:1.0 ./app`.
-3. **Load into minikube** → `minikube image load hello-app:1.0`.
-4. **Redeploy** in Kubernetes (we’ll cover this in the next step).
-5. **Verify** with `kubectl get pods` + `curl http://hello.local/`.
+2. **Rebuild image** →
+   ```bash
+   docker build -t hello-app:1.0 ./app
+   ```
+   ⚠️ Each time you make changes, **increment the version number** (`1.1`, `1.2`, etc.) instead of reusing `1.0`.
+   This avoids conflicts with cached images inside Minikube.
+3. **Load into Minikube** →
+   ```bash
+   minikube image load hello-app:1.1
+   ```
+4. **Redeploy in Kubernetes** (we’ll cover this in the next step).
+5. **Verify** with:
+   ```bash
+   kubectl get pods
+   curl http://hello.local/
+   ```
 
 Here’s the cycle:
 
 ```mermaid
 flowchart LR
-    A[Edit Code] --> B[Rebuild Docker Image]
+    A[Edit Code] --> B[Rebuild Docker Image \(new version\)]
     B --> C[Load Image into Minikube]
     C --> D[Redeploy in Kubernetes]
     D --> E[Verify / Test]
