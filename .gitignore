@@ -1,4 +1,45 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pytest_cache/
+.venv/
+env/
+venv/
+
+# Jupyter / notebooks (if experimenting)
+.ipynb_checkpoints/
+
+# Node/JS
+node_modules/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Docker
+*.tar
+*.log
+docker-compose.override.yml
+
+# Kubernetes
+*.yaml~
+.kube/
+.secrets/
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Project specific
 app/__pycache__/
-.secrets
-venv
-.env*
+app/*.egg-info/
+dist/
+build/
+
+# Ignore local notes
+notes.txt
+TODO.md
