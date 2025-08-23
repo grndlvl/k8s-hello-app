@@ -3,8 +3,6 @@ kind: Ingress
 metadata:
   name: hello-app-ingress
   namespace: hello
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"  # allow HTTP before TLS is set up
 spec:
   ingressClassName: nginx
   tls:
