@@ -14,11 +14,14 @@ spec:
       labels:
         app: hello-app
     spec:
-      # Pod-level security context
+      # Pod-level security context: enforce non-root user/group IDs
       securityContext:
-        runAsUser: 10001
-        runAsGroup: 10001
         runAsNonRoot: true
+        runAsUser: 10000
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - name: hello-app
         image: hello-app:1.0

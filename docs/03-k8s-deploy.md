@@ -64,7 +64,7 @@ spec:
     spec:
       # Pod-level security context
       securityContext:
-        runAsUser: 10001
+        runAsUser: 10000
         runAsGroup: 10001
         runAsNonRoot: true
       containers:
@@ -113,7 +113,7 @@ kubectl rollout status deployment/hello-app
 
 ### 🛡️ Why the security context?
 
-- The Dockerfile already uses UID/GID `10001`.  
+- The Dockerfile creates a non-root user `UID 10000` in group `GID 10001`, and our manifest enforces it.
 - Adding `securityContext` enforces it at the cluster level.  
 - Container hardening prevents privilege escalation, locks the filesystem, and drops Linux capabilities.  
 
