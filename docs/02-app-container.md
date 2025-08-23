@@ -256,16 +256,16 @@ When working with Kubernetes, your development loop looks like this:
    ```
    ⚠️ Each time you make changes, **increment the version number** (`1.1`, `1.2`, etc.) instead of reusing `1.0`.
    This avoids conflicts with cached images inside Minikube.
-3. **Load into Minikube** →
+3. **(Optional) Test locally with Docker** →  
+   ```bash
+   docker run --rm -p 8000:8000 hello-app:1.0
+   curl http://localhost:8000/
+   ```
+4. **Load into Minikube** →
    ```bash
    minikube image load hello-app:1.1
    ```
-4. **Redeploy in Kubernetes** (we’ll cover this in the next step).
-5. **Verify** with:
-   ```bash
-   kubectl get pods
-   curl http://hello.local/
-   ```
+5. **Redeploy in Kubernetes** (we’ll cover this in the next step).
 
 Here’s the cycle:
 
