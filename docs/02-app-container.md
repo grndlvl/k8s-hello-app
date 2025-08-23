@@ -271,7 +271,7 @@ Here’s the cycle:
 
 ```mermaid
 flowchart LR
-    A[Edit Code] --> B[Rebuild Docker Image \(new version\)]
+    A[Edit Code] --> B["Rebuild Docker Image (new version)"]
     B --> C[Load Image into Minikube]
     C --> D[Redeploy in Kubernetes]
     D --> E[Verify / Test]
