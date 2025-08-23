@@ -202,8 +202,8 @@ Stop port-forwarding with `Ctrl-C`.
 When you change `main.py` or rebuild the container, you’ll need to reload the image into minikube:
 
 ```bash
-docker build -t hello-app:1.0 ./app
-minikube image load hello-app:1.0
+docker build -t hello-app:1.1 ./app
+minikube image load hello-app:1.1
 kubectl rollout restart deployment/hello-app
 ```
 
