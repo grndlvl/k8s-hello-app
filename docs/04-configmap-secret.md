@@ -126,38 +126,13 @@ kubectl apply -f .secrets/hello-app-secret.yaml
 
 ## 6. Update the Deployment
 
-We now inject the ConfigMap and Secret values as environment variables.
+We now inject the ConfigMap and Secret values as environment variables by updating
+our existing deployment manifest.
 
 📄 `k8s/manifests/deployment.yaml` (excerpt)
 
 ```yaml
-# k8s/manifests/deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: hello-app
-  namespace: hello
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: hello-app
-  template:
-    metadata:
-      labels:
-        app: hello-app
-    spec:
-      # Pod-level security context
-      securityContext:
-        runAsUser: 10001
-        runAsGroup: 10001
-        runAsNonRoot: true
-      containers:
-      - name: hello-app
-        image: hello-app:1.0
-        imagePullPolicy: Never   # Always use the locally loaded image in minikube
-        ports:
-        - containerPort: 8080
+...
         env:
         - name: APP_MESSAGE
           valueFrom:
@@ -179,33 +154,12 @@ spec:
             secretKeyRef:
               name: hello-app-secret
               key: SECRET_DB_PASSWORD
-        # Container-level hardening
-        securityContext:
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
-          capabilities:
-            drop: ["ALL"]
-        resources:
-          # ⚠️ Required for HPA (CPU-based) to work properly
-          requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 200m
-            memory: 256Mi
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 8080
-          initialDelaySeconds: 2
-          periodSeconds: 5
-        livenessProbe:
-          httpGet:
-            path: /livez
-            port: 8080
-          initialDelaySeconds: 2
-          periodSeconds: 10
+...
 ```
+
+Quick notes:
+
+Put this under the same container where you define image, ports, etc.
 
 Reapply:
 
@@ -226,15 +180,19 @@ kubectl exec -it deploy/hello-app -- sh
 Check the environment variables:
 
 ```bash
-echo $GREETING
-echo $API_KEY
+echo $APP_MESSAGE
+echo $APP_MODE
+echo $SECRET_API_KEY
+echo $SECRET_DB_PASSWORD
 ```
 
 Expected output:
 
 ```
 Hello from ConfigMap 👋
+develop
 super-secret-key
+super-secret-password
 ```
 
 Exit:
