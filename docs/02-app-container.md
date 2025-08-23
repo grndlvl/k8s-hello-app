@@ -100,25 +100,25 @@ RUN /opt/venv/bin/python -m compileall -q /app
 FROM python:3.12-slim
 
 RUN groupadd --gid 10001 app \
- && useradd --uid 10001 --gid 10001 --system --no-create-home --shell /usr/sbin/nologin app
+ && useradd --uid 10000 --gid 10001 --system --no-create-home --shell /usr/sbin/nologin app
 
 COPY --from=build /opt/venv /opt/venv
 COPY --from=build /app /app
 ENV PATH="/opt/venv/bin:${PATH}"
 
 WORKDIR /app
-RUN chown -R 10001:10001 /app
-USER 10001:10001
+RUN chown -R 10000:10001 /app
+USER 10000:10001
 
 EXPOSE 8080
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
 ```
 
-### 🔐 Why use UID `10001`?
+### 🔐 Why use UID `10000`?
 
 - Running containers as **root (UID 0)** is a security risk.
 - Kubernetes best practices recommend non-root users so that, even if compromised, the container can’t access host-level privileges.
-- We chose `10001` (an arbitrary non-privileged UID) so it doesn’t overlap with common system accounts.
+- We chose `10000` (an arbitrary non-privileged UID) so it doesn’t overlap with common system accounts.
 - Many security scanners (like Trivy, Aqua) will flag root containers — this avoids those warnings.
 
 ### 🏗️ Why two stages (Build vs Runtime)?
