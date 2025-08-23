@@ -80,10 +80,10 @@ kubectl get ns
 Launch your local Kubernetes cluster with:
 
 ```bash
-minikube start --cpus=4 --memory=4096
+minikube start --cpus=2 --memory=4096
 ```
 
-This allocates 4 CPUs and 4GB RAM — enough for our demo.
+This allocates 2 CPUs and 4GB RAM — more than enough for our demo.
 
 Verify your cluster is running:
 
@@ -154,8 +154,6 @@ ping -c 1 hello.local
 ```
 
 You should see it resolve to your minikube IP.
-
----
 
 ---
 
