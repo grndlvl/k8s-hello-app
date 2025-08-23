@@ -12,7 +12,7 @@ We’ll create:
 
 ---
 
-## 🏷️ Step 1. Create a Namespace
+## 1. Create a Namespace
 
 Namespaces help keep resources grouped logically. We’ll use `hello`.
 
@@ -41,7 +41,7 @@ You should see `hello` listed and marked as active.
 
 ---
 
-## 📦 Step 2. Create a Deployment
+## 2. Create a Deployment
 
 A Deployment manages pods for us. We’ll run **2 replicas** of `hello-app` by default.
 
@@ -135,7 +135,7 @@ These are critical for keeping your app reliable under load.
 
 ---
 
-## 🌐 Step 3. Create a Service
+## 3. Create a Service
 
 A Service exposes pods internally in the cluster. We’ll use a **ClusterIP** service so the Deployment can later be wired into an Ingress.
 
@@ -163,7 +163,7 @@ kubectl get svc
 
 ---
 
-## 🔍 Step 4. Verify the Deployment
+## 4. Verify the Deployment
 
 Port-forward to test the service:
 

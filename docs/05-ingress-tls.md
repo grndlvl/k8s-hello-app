@@ -5,7 +5,7 @@ Our local hostname will be `hello.local`.
 
 ---
 
-## 0) Verify Ingress prerequisites
+## 0. Verify Ingress prerequisites
 
 > 📌 Make sure you’ve already enabled the Ingress controller and pointed `hello.local` to your cluster as described in [01-prereqs-setup.md](01-prereqs-setup.md).
 
@@ -23,7 +23,7 @@ ingress-nginx-controller-xxxxx   1/1   Running   0   1m
 
 ---
 
-## 1) Create the Ingress (HTTP)
+## 1. Create the Ingress (HTTP)
 
 📄 `k8s/manifests/ingress.yaml`
 
@@ -72,7 +72,7 @@ hello-app-ingress  nginx   hello.local   192.168.49.2    80      10s
 
 ---
 
-## 2) Test HTTP
+## 2. Test HTTP
 
 ```bash
 curl http://hello.local/
@@ -97,7 +97,7 @@ HTTP/1.1 200 OK
 
 ---
 
-## 3) Add TLS (self-signed)
+## 3. Add TLS (self-signed)
 
 We’ll create a **TLS Secret** outside of the repo and then enable HTTPS on the Ingress.
 
@@ -181,7 +181,7 @@ kubectl get secret hello-app-tls -n hello -o yaml
 
 ---
 
-## 4) Update Ingress to use TLS (HTTPS)
+## 4. Update Ingress to use TLS (HTTPS)
 
 Edit `k8s/manifests/ingress.yaml` to include TLS. Also remove the `ssl-redirect: "false"` override so HTTP will redirect to HTTPS.
 
@@ -226,7 +226,7 @@ kubectl describe ingress hello-app-ingress -n hello
 
 ---
 
-## 5) Test HTTPS
+## 5. Test HTTPS
 
 If using `/etc/hosts`:
 

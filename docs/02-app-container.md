@@ -1,11 +1,11 @@
 # 02 – Build the FastAPI App Container
 
-With the cluster ready, let’s build and package our application.  
+With the cluster ready, let’s build and package our application.
 We’ll use **FastAPI**, containerized with Docker, and configure it so Kubernetes can read settings from environment variables, ConfigMaps, and Secrets.
 
 ---
 
-## 📝 Step 1. Review the App Code
+## 1. Review the App Code
 
 In `app/main.py` you’ll find the FastAPI service:
 
@@ -60,17 +60,17 @@ def livez() -> Status:
     return Status(status="alive")
 ```
 
-Key points:  
-- Reads values from environment variables (`APP_MESSAGE`, `APP_MODE`, etc.).  
-- Returns both **greeting info** and **secrets info** (demo-safe).  
-- Provides `/healthz` and `/livez` endpoints for Kubernetes probes.  
-- Uses **Pydantic models** (`Greeting`, `SecretInfo`, `AppInfo`, `Status`) so responses are strongly typed.  
+Key points:
+- Reads values from environment variables (`APP_MESSAGE`, `APP_MODE`, etc.).
+- Returns both **greeting info** and **secrets info** (demo-safe).
+- Provides `/healthz` and `/livez` endpoints for Kubernetes probes.
+- Uses **Pydantic models** (`Greeting`, `SecretInfo`, `AppInfo`, `Status`) so responses are strongly typed.
 
-> ⚠️ **Note:** Any time you change `main.py` (or anything in the `app/` directory), you must **rebuild the Docker image** and reload it into minikube before Kubernetes can run the updated code.  
+> ⚠️ **Note:** Any time you change `main.py` (or anything in the `app/` directory), you must **rebuild the Docker image** and reload it into minikube before Kubernetes can run the updated code.
 
 ---
 
-## 📦 Step 2. Review the Dockerfile
+## 2. Review the Dockerfile
 
 In `app/Dockerfile` we use a **multi-stage build** for smaller images and a **non-root runtime user** for security:
 
@@ -116,21 +116,21 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
 
 ### 🔐 Why use UID `10001`?
 
-- Running containers as **root (UID 0)** is a security risk.  
-- Kubernetes best practices recommend non-root users so that, even if compromised, the container can’t access host-level privileges.  
-- We chose `10001` (an arbitrary non-privileged UID) so it doesn’t overlap with common system accounts.  
+- Running containers as **root (UID 0)** is a security risk.
+- Kubernetes best practices recommend non-root users so that, even if compromised, the container can’t access host-level privileges.
+- We chose `10001` (an arbitrary non-privileged UID) so it doesn’t overlap with common system accounts.
 - Many security scanners (like Trivy, Aqua) will flag root containers — this avoids those warnings.
 
 ### 🏗️ Why two stages (Build vs Runtime)?
 
-- **Build stage** includes heavy tools (`gcc`, `pip`, cache) needed only for installing Python packages.  
-- **Runtime stage** is lightweight: just Python + our app + its dependencies.  
-- This keeps the final image **smaller, faster to pull**, and reduces the attack surface.  
+- **Build stage** includes heavy tools (`gcc`, `pip`, cache) needed only for installing Python packages.
+- **Runtime stage** is lightweight: just Python + our app + its dependencies.
+- This keeps the final image **smaller, faster to pull**, and reduces the attack surface.
 - The app runs from a pre-built virtual environment (`/opt/venv`) copied from the build stage.
 
 ---
 
-## 🛠️ Step 3. Build the Container Image
+## 3. Build the Container Image
 
 From the project root, build the Docker image:
 
@@ -152,7 +152,7 @@ hello-app   1.0   abc123def456   2 minutes ago   120MB
 
 ---
 
-## ▶️ Step 4. Run the Container Locally
+## 4. Run the Container Locally
 
 Run the container in the foreground:
 
@@ -160,8 +160,8 @@ Run the container in the foreground:
 docker run -p 8080:8080 hello-app:1.0
 ```
 
-You should see `uvicorn` logs streaming in the terminal.  
-Leave it running while you test in another terminal.  
+You should see `uvicorn` logs streaming in the terminal.
+Leave it running while you test in another terminal.
 
 Verify the endpoints:
 
@@ -191,26 +191,26 @@ Keep the container running and continue to Step 5.
 
 ---
 
-## 📚 Step 5. Explore FastAPI’s Built-in Docs
+## 5. Explore FastAPI’s Built-in Docs
 
-One of FastAPI’s best features is **interactive API documentation**.  
-This works because our endpoints use **Pydantic models** with defined data types.  
+One of FastAPI’s best features is **interactive API documentation**.
+This works because our endpoints use **Pydantic models** with defined data types.
 
 Open these URLs in your browser:
 
-- Swagger UI: [http://localhost:8080/docs](http://localhost:8080/docs)  
-- ReDoc: [http://localhost:8080/redoc](http://localhost:8080/redoc)  
+- Swagger UI: [http://localhost:8080/docs](http://localhost:8080/docs)
+- ReDoc: [http://localhost:8080/redoc](http://localhost:8080/redoc)
 
-You’ll see:  
-- A **live playground** where you can try requests without `curl`.  
-- Data models (`Greeting`, `SecretInfo`, `AppInfo`) automatically documented.  
+You’ll see:
+- A **live playground** where you can try requests without `curl`.
+- Data models (`Greeting`, `SecretInfo`, `AppInfo`) automatically documented.
 - Clear request/response schemas — perfect for debugging and learning.
 
 Swagger UI
-![Swagger UI Screenshot](./images/swagger-ui.png)  
+![Swagger UI Screenshot](./images/swagger-ui.png)
 
 ReDoc
-![ReDoc Screenshot](./images/redoc.png)  
+![ReDoc Screenshot](./images/redoc.png)
 
 When finished, return to the terminal running Docker and stop the container with:
 
@@ -220,7 +220,7 @@ Ctrl-C
 
 ---
 
-## 📤 Step 6. Load Image into minikube
+## 6. Load Image into minikube
 
 Make the image available to your minikube cluster.
 
@@ -249,11 +249,11 @@ minikube image ls | grep hello-app
 
 When working with Kubernetes, your development loop looks like this:
 
-1. **Edit code** → change `main.py` or other files.  
-2. **Rebuild image** → `docker build -t hello-app:1.0 ./app`.  
-3. **Load into minikube** → `minikube image load hello-app:1.0`.  
-4. **Redeploy** in Kubernetes (we’ll cover this in the next step).  
-5. **Verify** with `kubectl get pods` + `curl http://hello.local/`.  
+1. **Edit code** → change `main.py` or other files.
+2. **Rebuild image** → `docker build -t hello-app:1.0 ./app`.
+3. **Load into minikube** → `minikube image load hello-app:1.0`.
+4. **Redeploy** in Kubernetes (we’ll cover this in the next step).
+5. **Verify** with `kubectl get pods` + `curl http://hello.local/`.
 
 Here’s the cycle:
 
@@ -266,18 +266,18 @@ flowchart LR
     E --> A
 ```
 
-> ⚠️ **Important note about minikube images:**  
-> minikube maintains its **own internal image repository**. This means:  
-> - If you rebuild the same tag (`hello-app:1.0`) locally, Kubernetes may still run the *old* image inside minikube.  
-> - To fix this, either:  
->   - **Delete the old image** in minikube (`minikube image rm hello-app:1.0`), then reload it.  
->   - **Use a new tag** (e.g. `hello-app:1.1`) each time you rebuild.  
-> - Forgetting this step is one of the most common beginner mistakes.  
+> ⚠️ **Important note about minikube images:**
+> minikube maintains its **own internal image repository**. This means:
+> - If you rebuild the same tag (`hello-app:1.0`) locally, Kubernetes may still run the *old* image inside minikube.
+> - To fix this, either:
+>   - **Delete the old image** in minikube (`minikube image rm hello-app:1.0`), then reload it.
+>   - **Use a new tag** (e.g. `hello-app:1.1`) each time you rebuild.
+> - Forgetting this step is one of the most common beginner mistakes.
 
 ---
 
 ## ⏭️ Next Step
 
-You’ve just built and containerized the FastAPI app. 🎉  
+You’ve just built and containerized the FastAPI app. 🎉
 
 Continue to [03-k8s-deploy.md](03-k8s-deploy.md) where we’ll deploy the app into Kubernetes

@@ -6,7 +6,7 @@ The HPA watches Pod metrics (CPU/Memory) and adjusts the number of replicas in y
 
 ---
 
-## 0) Verify metrics are available
+## 0. Verify metrics are available
 
 > 📌 Prereq: Ensure the Kubernetes **metrics-server** is installed as described in [01-prereqs-setup.md](01-prereqs-setup.md).
 
@@ -21,7 +21,7 @@ Expected: You should see CPU/Memory usage numbers. If you see errors about metri
 
 ---
 
-## 1) Confirm resource requests in the Deployment
+## 1. Confirm resource requests in the Deployment
 
 > HPA uses **resource requests** to compute utilization. We already added them to the container earlier, but verify they’re present:
 
@@ -47,7 +47,7 @@ kubectl rollout status deploy/hello-app
 
 ---
 
-## 2) Create the HPA manifest
+## 2. Create the HPA manifest
 
 We’ll scale between **2 and 5 replicas**, targeting **70% CPU utilization** of the container’s CPU **request** (100m).  
 That means: if average CPU > 70m across Pods, HPA will scale out; if below, it scales in.
@@ -100,7 +100,7 @@ hello-app-hpa   Deployment/hello-app   5%/70%    2         5         2          
 
 ---
 
-## 3) Generate load to trigger scaling
+## 3. Generate load to trigger scaling
 
 We’ll use [`hey`](https://github.com/rakyll/hey), a small HTTP load generator.
 
@@ -160,7 +160,7 @@ Expected behavior:
 
 ---
 
-## 4) Alternative: one‑liner autoscale (optional)
+## 4. Alternative: one‑liner autoscale (optional)
 
 You can also create an HPA without a manifest using the imperative command:
 
@@ -176,7 +176,7 @@ kubectl autoscale deploy hello-app \
 
 ---
 
-## 5) Troubleshooting
+## 5. Troubleshooting
 
 - **No metrics available**
   ```bash

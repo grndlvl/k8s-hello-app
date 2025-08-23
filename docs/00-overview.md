@@ -1,6 +1,6 @@
 # Kubernetes Starter: Ingress + Probes + Autoscaling
 
-Welcome! 🎉 This project (repo: **`k8s-hello-app`**) is a hands-on starter for learning Kubernetes fundamentals by deploying a small FastAPI “Hello World” service (`hello.local`) in a local minikube cluster.  
+Welcome! 🎉 This project (repo: **`k8s-hello-app`**) is a hands-on starter for learning Kubernetes fundamentals by deploying a small FastAPI “Hello World” service (`hello.local`) in a local minikube cluster.
 
 You’ll practice the most important Kubernetes concepts — Deployments, Services, Ingress, ConfigMaps, Secrets, resource limits, and autoscaling — in a safe, local environment. By the end, you’ll have confidence running and operating a real-world style workload in Kubernetes.
 
@@ -8,56 +8,56 @@ You’ll practice the most important Kubernetes concepts — Deployments, Servic
 
 # Overview
 
-**Goal:** Deploy a small FastAPI service on Kubernetes with Ingress, probes, ConfigMap/Secret, and HPA.  
+**Goal:** Deploy a small FastAPI service on Kubernetes with Ingress, probes, ConfigMap/Secret, and HPA.
 
 ---
 
 ## 🚀 Project Goals
 
-- Learn how to containerize a small web application.  
-- Deploy the app to Kubernetes using `kubectl` and YAML manifests.  
-- Understand core resources: Pods, Deployments, Services, ConfigMaps, Secrets.  
-- Expose the app to the outside world with an NGINX ingress controller and TLS certificates.  
-- Add scaling with the Horizontal Pod Autoscaler (HPA).  
-- Practice basic troubleshooting and security concepts.  
-- Walk away with a **repeatable workflow** you can reuse for future projects.  
+- Learn how to containerize a small web application.
+- Deploy the app to Kubernetes using `kubectl` and YAML manifests.
+- Understand core resources: Pods, Deployments, Services, ConfigMaps, Secrets.
+- Expose the app to the outside world with an NGINX ingress controller and TLS certificates.
+- Add scaling with the Horizontal Pod Autoscaler (HPA).
+- Practice basic troubleshooting and security concepts.
+- Walk away with a **repeatable workflow** you can reuse for future projects.
 
 ---
 
 ## 📚 Learning Outcomes
 
-By completing this project, you should be able to:  
+By completing this project, you should be able to:
 
-- Explain the difference between a Pod, Deployment, and Service.  
-- Write and apply Kubernetes YAML manifests.  
-- Verify resources with `kubectl get` and `kubectl describe`.  
-- Manage configuration securely using ConfigMaps and Secrets.  
-- Route traffic into your cluster with Ingress + TLS.  
-- Configure scaling with HPA based on CPU usage.  
-- Debug common issues with logs and troubleshooting commands.  
-- Operate a simple app with Kubernetes like a real-world engineer.  
+- Explain the difference between a Pod, Deployment, and Service.
+- Write and apply Kubernetes YAML manifests.
+- Verify resources with `kubectl get` and `kubectl describe`.
+- Manage configuration securely using ConfigMaps and Secrets.
+- Route traffic into your cluster with Ingress + TLS.
+- Configure scaling with HPA based on CPU usage.
+- Debug common issues with logs and troubleshooting commands.
+- Operate a simple app with Kubernetes like a real-world engineer.
 
 ---
 
 ## 🛠️ Tech Stack
 
-This project uses:  
+This project uses:
 
-- **FastAPI** – a lightweight Python web framework for our demo app.  
-- **Docker** – to build and containerize the app.  
-- **Kubernetes** – our orchestration platform (using **minikube** locally).  
-- **kubectl** – command-line tool to interact with the cluster.  
-- **NGINX Ingress Controller** – for routing external traffic into the cluster.  
-- **cert-manager** – for automatically managing TLS certificates (self-signed for demo).  
-- **Horizontal Pod Autoscaler (HPA)** – to scale our app up and down under load.  
+- **FastAPI** – a lightweight Python web framework for our demo app.
+- **Docker** – to build and containerize the app.
+- **Kubernetes** – our orchestration platform (using **minikube** locally).
+- **kubectl** – command-line tool to interact with the cluster.
+- **NGINX Ingress Controller** – for routing external traffic into the cluster.
+- **cert-manager** – for automatically managing TLS certificates (self-signed for demo).
+- **Horizontal Pod Autoscaler (HPA)** – to scale our app up and down under load.
 
 ---
 
 ## 🏗️ Architecture
 
-- FastAPI container → **Deployment** (2 replicas) → **Service** (ClusterIP) → **Ingress (NGINX)**  
-- Config via **ConfigMap/Secret**  
-- Autoscaling via **HPA (CPU-based)**  
+- FastAPI container → **Deployment** (2 replicas) → **Service** (ClusterIP) → **Ingress (NGINX)**
+- Config via **ConfigMap/Secret**
+- Autoscaling via **HPA (CPU-based)**
 
 ```mermaid
 flowchart TB
@@ -113,9 +113,9 @@ flowchart TB
 
 ## 🎯 Success Criteria
 
-- App reachable at **https://hello.local**  
-- HPA scales under load (**2 → 5 replicas**)  
-- Config change visible **without an image rebuild**  
+- App reachable at **https://hello.local**
+- HPA scales under load (**2 → 5 replicas**)
+- Config change visible **without an image rebuild**
 
 ---
 
@@ -159,7 +159,7 @@ Here’s how the repo is organized:
 
 ## 🔀 Following Along
 
-Each step in this tutorial is published as a **git tag**.  
+Each step in this tutorial is published as a **git tag**.
 The `main` branch contains the **final completed project**.
 
 To get started, check out the first tag:
@@ -168,7 +168,7 @@ To get started, check out the first tag:
 git checkout step-01-prereqs
 ```
 
-From there, follow [01-prereqs-setup.md](01-prereqs-setup.md).  
+From there, follow [01-prereqs-setup.md](01-prereqs-setup.md).
 Each doc ends with a **⏭️ Next Step** footer telling you which tag to checkout next.
 
 > 💡 You can always see available steps with:
@@ -180,14 +180,14 @@ Each doc ends with a **⏭️ Next Step** footer telling you which tag to checko
 
 ## ✅ What You’ll Accomplish
 
-By the end of this tutorial, you will:  
+By the end of this tutorial, you will:
 
-- Run a FastAPI web app inside Kubernetes.  
-- Access it securely with HTTPS through an Ingress.  
-- Scale it automatically with HPA.  
-- Know how to debug and operate your own Kubernetes workloads.  
+- Run a FastAPI web app inside Kubernetes.
+- Access it securely with HTTPS through an Ingress.
+- Scale it automatically with HPA.
+- Know how to debug and operate your own Kubernetes workloads.
 
-This project is a safe, local sandbox -- experiment as much as you like!  
+This project is a safe, local sandbox -- experiment as much as you like!
 
 ---
 
@@ -197,8 +197,8 @@ By the end of this tutorial, your app will look like this in Kubernetes:
 
 ![Capstone Demo](./images/k8s-instructional-capstone.gif)
 
-- App reachable at **http://hello.local**  
-- Ingress routing requests to your pods  
+- App reachable at **http://hello.local**
+- Ingress routing requests to your pods
 - HPA automatically scaling from 2 → 5 replicas under load
 
 ---
@@ -207,5 +207,5 @@ By the end of this tutorial, your app will look like this in Kubernetes:
 
 Continue to [01-prereqs-setup.md](01-prereqs-setup.md).
 
-💡 Tip: Make sure you’ve checked out the **`start` branch** if you’re following along from scratch.  
+💡 Tip: Make sure you’ve checked out the **`start` branch** if you’re following along from scratch.
 The `main` branch contains the finished project, while `start` is your clean slate.

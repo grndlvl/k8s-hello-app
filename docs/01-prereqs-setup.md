@@ -1,6 +1,6 @@
 # 01 – Prerequisites & Setup
 
-Before we dive into Kubernetes, let’s set up the tools you’ll need for this project.  
+Before we dive into Kubernetes, let’s set up the tools you’ll need for this project.
 This guide assumes you’re running on **Linux** or **macOS**. Windows users can follow along with [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install).
 
 ---
@@ -9,30 +9,30 @@ This guide assumes you’re running on **Linux** or **macOS**. Windows users can
 
 Install the following tools:
 
-1. **Docker** – to build and run containers.  
-   - Install: https://docs.docker.com/get-docker/  
+1. **Docker** – to build and run containers.
+   - Install: https://docs.docker.com/get-docker/
    - Verify:
      ```bash
      docker --version
      docker run hello-world
      ```
 
-2. **kubectl** – the Kubernetes command-line tool.  
-   - Install: https://kubernetes.io/docs/tasks/tools/  
+2. **kubectl** – the Kubernetes command-line tool.
+   - Install: https://kubernetes.io/docs/tasks/tools/
    - Verify:
      ```bash
      kubectl version --client
      ```
 
-3. **minikube** – local Kubernetes cluster (our playground).  
-   - Install: https://minikube.sigs.k8s.io/docs/start/  
+3. **minikube** – local Kubernetes cluster (our playground).
+   - Install: https://minikube.sigs.k8s.io/docs/start/
    - Verify:
      ```bash
      minikube version
      ```
 
-4. **make** – to use the provided `Makefile` shortcuts.  
-   - Already installed on most systems.  
+4. **make** – to use the provided `Makefile` shortcuts.
+   - Already installed on most systems.
    - Verify:
      ```bash
      make --version
@@ -44,7 +44,7 @@ Install the following tools:
 
 ## 🔧 Make `kubectl` Work with minikube
 
-When using minikube, the `kubectl` binary on your system may not point to the cluster.  
+When using minikube, the `kubectl` binary on your system may not point to the cluster.
 Instead of typing `minikube kubectl -- get pods` each time, you can map `kubectl` directly:
 
 ```bash
@@ -57,7 +57,7 @@ Now a simple:
 kubectl get pods -A
 ```
 
-will work as expected.  
+will work as expected.
 
 👉 To make this persistent across shells, add the alias to your shell config:
 
@@ -102,7 +102,7 @@ minikube   Ready    control-plane   1m    v1.30.0
 
 ## 🌐 Enable NGINX Ingress
 
-We’ll use an Ingress Controller to route external traffic into the cluster.  
+We’ll use an Ingress Controller to route external traffic into the cluster.
 
 Enable the addon:
 
@@ -140,7 +140,7 @@ You should see pods for `cert-manager`, `cert-manager-cainjector`, and `cert-man
 
 ## 📍 Add local DNS entry
 
-We’ll access the app at `https://hello.local`.  
+We’ll access the app at `https://hello.local`.
 Add this hostname to your `/etc/hosts` file:
 
 ```bash
@@ -161,6 +161,6 @@ You should see it resolve to your minikube IP.
 
 ## ⏭️ Next Step
 
-Cluster is ready and Ingress is enabled. 🚀  
+Cluster is ready and Ingress is enabled. 🚀
 
 Continue to [02-app-container.md](02-app-container.md) where we’ll build and containerize the FastAPI app.
