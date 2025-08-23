@@ -41,9 +41,9 @@ Check out the final code and run it locally:
 
 Once deployed, open:
 
-- App: http://hello.local  
-- FastAPI Docs: http://hello.local/docs  
-- ReDoc: http://hello.local/redoc  
+- App: https://hello.local  
+- FastAPI Docs: https://hello.local/docs  
+- ReDoc: https://hello.local/redoc  
 
 👉 If you prefer to learn step-by-step, start with [00-overview.md](./docs/00-overview.md).
 
