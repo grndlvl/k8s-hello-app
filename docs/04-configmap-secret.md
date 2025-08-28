@@ -127,7 +127,7 @@ kubectl apply -f .secrets/hello-app-secret.yaml
 ## 6. Update the Deployment
 
 We now inject the ConfigMap and Secret values as environment variables by updating
-our existing deployment manifest.
+our existing deployment manifest under the container section.
 
 📄 `k8s/manifests/deployment.yaml` (excerpt)
 
