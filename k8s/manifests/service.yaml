@@ -1,0 +1,12 @@
+# k8s/manifests/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-app
+  namespace: hello
+spec:
+  selector:
+    app: hello-app
+  ports:
+    - port: 80
+      targetPort: 8080
