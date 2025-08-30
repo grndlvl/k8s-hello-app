@@ -34,7 +34,7 @@ metadata:
   name: hello-app-ingress
   namespace: hello
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"  # allow HTTP before TLS is set up
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"  # allow HTTP before TLS is set up
 spec:
   ingressClassName: nginx
   rules:
@@ -183,7 +183,7 @@ kubectl get secret hello-app-tls -n hello -o yaml
 
 ## 4. Update Ingress to use TLS (HTTPS)
 
-Edit `k8s/manifests/ingress.yaml` to include TLS. Also remove the `ssl-redirect: "false"` override so HTTP will redirect to HTTPS.
+Edit `k8s/manifests/ingress.yaml` to include TLS. Also change the `force-ssl-redirect: "false"` to true so that HTTP redirects to HTTPS.
 
 📄 `k8s/manifests/ingress.yaml` (final)
 
@@ -193,6 +193,8 @@ kind: Ingress
 metadata:
   name: hello-app-ingress
   namespace: hello
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
