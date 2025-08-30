@@ -157,6 +157,31 @@ You should see it resolve to your minikube IP.
 
 ---
 
+## 📈 Enable Metrics Server
+
+In order for Horizontal Pod Autoscaling (HPA) to work, we need the Metrics Server.
+
+Enable the addon:
+
+```bash
+minikube addons enable metrics-server
+```
+
+Verify the controller is running:
+
+```bash
+kubectl top pods
+```
+
+You should see output like:
+```
+NAME                         CPU(cores)   MEMORY(bytes)
+hello-app-59dd79486f-2zqf4   3m           37Mi
+hello-app-59dd79486f-rjl2z   3m           37Mi
+```
+
+---
+
 ## ⏭️ Next Step
 
 Cluster is ready and Ingress is enabled. 🚀
