@@ -30,15 +30,6 @@ Apply it:
 kubectl apply -f k8s/manifests/namespace.yaml
 ```
 
-Set the namespace as the current context so all future commands default to it:
-
-```bash
-kubectl config set-context --current --namespace=hello
-kubectl config view --minify --output 'jsonpath={..namespace}'
-```
-
-You should see `hello` listed and marked as active.
-
 ---
 
 ## 2. Create a Deployment
@@ -104,9 +95,9 @@ spec:
 Apply it:
 
 ```bash
-kubectl apply -f k8s/manifests/deployment.yaml
-kubectl get pods
-kubectl rollout status deployment/hello-app
+kubectl -n hello apply -f k8s/manifests/deployment.yaml
+kubectl -n hello get pods
+kubectl -n hello rollout status deployment/hello-app
 ```
 
 ---
@@ -157,8 +148,8 @@ spec:
 Apply it:
 
 ```bash
-kubectl apply -f k8s/manifests/service.yaml
-kubectl get svc
+kubectl -n hello apply -f k8s/manifests/service.yaml
+kubectl -n hello get svc
 ```
 
 ---
@@ -168,7 +159,7 @@ kubectl get svc
 Port-forward to test the service:
 
 ```bash
-kubectl port-forward svc/hello-app 8080:80
+kubectl -n hello port-forward svc/hello-app 8080:80
 ```
 
 Now open a new terminal and curl the endpoint:

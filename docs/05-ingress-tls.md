@@ -53,14 +53,14 @@ spec:
 Apply it:
 
 ```bash
-kubectl apply -f k8s/manifests/ingress.yaml
+kubectl -n hello apply -f k8s/manifests/ingress.yaml
 ```
 
 Verify:
 
 ```bash
-kubectl get ingress -n hello
-kubectl describe ingress hello-app-ingress -n hello
+kubectl -n hello get ingress
+kubectl -n hello describe ingress hello-app-ingress
 ```
 
 Expected (note the ADDRESS and HOSTS):
@@ -164,19 +164,18 @@ Copy the output into the `tls.crt` and `tls.key` fields above.
 Alternatively, you can let `kubectl` generate the Secret directly from the files (recommended):
 
 ```bash
-kubectl create secret tls hello-app-tls \
-  --namespace hello \
+kubectl -n hello create secret tls hello-app-tls \
   --key .secrets/tls/hello.local.key \
   --cert .secrets/tls/hello.local.crt \
   --dry-run=client -o yaml > .secrets/hello-app-tls.yaml
 
-kubectl apply -f .secrets/hello-app-tls.yaml
+kubectl -n hello apply -f .secrets/hello-app-tls.yaml
 ```
 
 Verify:
 
 ```bash
-kubectl get secret hello-app-tls -n hello -o yaml
+kubectl -n hello get secret hello-app-tls -o yaml
 ```
 
 ---
@@ -217,13 +216,13 @@ spec:
 Apply it:
 
 ```bash
-kubectl apply -f k8s/manifests/ingress.yaml
+kubectl -n hello apply -f k8s/manifests/ingress.yaml
 ```
 
 Verify:
 
 ```bash
-kubectl describe ingress hello-app-ingress -n hello
+kubectl -n hello describe ingress hello-app-ingress
 ```
 
 ---

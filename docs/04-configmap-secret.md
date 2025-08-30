@@ -27,13 +27,13 @@ data:
 Apply it:
 
 ```bash
-kubectl apply -f k8s/manifests/configmap.yaml
+kubectl -n hello apply -f k8s/manifests/configmap.yaml
 ```
 
 Verify:
 
 ```bash
-kubectl get configmap hello-app-config -o yaml
+kubectl -n hello get configmap hello-app-config -o yaml
 ```
 
 ---
@@ -96,13 +96,13 @@ stringData:
 Apply it:
 
 ```bash
-kubectl apply -f .secrets/secret.yaml
+kubectl -n hello apply -f .secrets/secret.yaml
 ```
 
 Verify:
 
 ```bash
-kubectl get secret hello-app-secret -n hello -o yaml
+kubectl -n hello get secret hello-app-secret -o yaml
 ```
 
 Values will show up under `data:` in base64 form (that’s expected).
@@ -114,12 +114,11 @@ Values will show up under `data:` in base64 form (that’s expected).
 Instead of a file, you can generate it with `kubectl`:
 
 ```bash
-kubectl create secret generic hello-app-secret \
-  --namespace hello \
+kubectl -n hello create secret generic hello-app-secret \
   --from-literal=API_KEY="super-secret-key" \
   --dry-run=client -o yaml > .secrets/hello-app-secret.yaml
 
-kubectl apply -f .secrets/hello-app-secret.yaml
+kubectl -n hello apply -f .secrets/hello-app-secret.yaml
 ```
 
 ---
@@ -164,7 +163,7 @@ Put this under the same container where you define image, ports, etc.
 Reapply:
 
 ```bash
-kubectl apply -f k8s/manifests/deployment.yaml
+kubectl -n hello apply -f k8s/manifests/deployment.yaml
 ```
 
 ---
@@ -174,7 +173,7 @@ kubectl apply -f k8s/manifests/deployment.yaml
 Open a shell inside the pod:
 
 ```bash
-kubectl exec -it deploy/hello-app -- sh
+kubectl -n hello exec -it deploy/hello-app -- sh
 ```
 
 Check the environment variables:

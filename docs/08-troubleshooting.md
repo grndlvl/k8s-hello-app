@@ -42,7 +42,7 @@ docker build -t hello-api:latest ./app
 Then delete the failing pod so it restarts:
 
 ```bash
-kubectl delete pod <pod-name>
+kubectl -n hello delete pod <pod-name>
 ```
 
 ---
@@ -54,7 +54,7 @@ kubectl delete pod <pod-name>
 ✅ **Fix**: Inspect logs:
 
 ```bash
-kubectl logs <pod-name>
+kubectl -n hello logs <pod-name>
 ```
 
 Common causes:
@@ -68,7 +68,7 @@ Common causes:
 👉 **Symptom**:
 
 ```bash
-kubectl get svc
+kubectl -n hello get svc
 curl http://<cluster-ip>:8000
 # Connection refused
 ```
@@ -78,7 +78,7 @@ curl http://<cluster-ip>:8000
 - Port-forward for debugging:
 
 ```bash
-kubectl port-forward svc/hello-api 8000:8000
+kubectl -n hello port-forward svc/hello-api 8000:8000
 curl http://localhost:8000
 ```
 
@@ -97,13 +97,13 @@ curl http://hello.local
 - Ensure ingress controller is running:
 
 ```bash
-kubectl get pods -n ingress-nginx
+kubectl -n hello get pods -n ingress-nginx
 ```
 
 - Check rules:
 
 ```bash
-kubectl describe ingress hello-api
+kubectl -n hello describe ingress hello-api
 ```
 
 - Verify `/etc/hosts` entry. First, get your Minikube IP:
@@ -138,7 +138,7 @@ curl: (60) SSL certificate problem
 - Verify secret exists:
 
 ```bash
-kubectl get secret hello-tls
+kubectl -n hello get secret hello-tls
 ```
 
 - If using self-signed certs, add to your local trust store.
@@ -151,7 +151,7 @@ kubectl get secret hello-tls
 👉 **Symptom**:
 
 ```bash
-kubectl get hpa
+kubectl -n hello get hpa
 # REPLICAS stays 1 despite load
 ```
 
@@ -159,7 +159,7 @@ kubectl get hpa
 - Check metrics-server is installed:
 
 ```bash
-kubectl top pods
+kubectl -n hello top pods
 ```
 
 - Ensure `resources.requests.cpu` is set in deployment.
@@ -187,7 +187,7 @@ We run as **non-root UID 10001** with read-only FS.
 Sometimes it’s easiest to jump into a pod:
 
 ```bash
-kubectl run -it debug --image=busybox --restart=Never -- sh
+kubectl -n hello run -it debug --image=busybox --restart=Never -- sh
 ```
 
 Use it to test DNS, curl services, etc.
@@ -220,14 +220,14 @@ docker rmi hello-api:latest
 - Scale down or delete deployments first:
 
 ```bash
-kubectl delete deployment hello-api
+kubectl -n hello delete deployment hello-api
 ```
 
 3. Rebuild and redeploy:
 
 ```bash
 docker build -t hello-api:latest ./app
-kubectl apply -f k8s/manifests/deployment.yaml
+kubectl -n hello apply -f k8s/manifests/deployment.yaml
 ```
 
 👉 Tip: If you reuse the same tag, Minikube may cache the old image. Deleting the deployment first avoids this issue.

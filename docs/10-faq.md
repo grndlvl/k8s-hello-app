@@ -36,7 +36,7 @@ They are also required for the **Horizontal Pod Autoscaler (HPA)** to function.
 
 - Make sure the ingress controller (`ingress-nginx`) is running.
 - Verify `/etc/hosts` has an entry for `hello.local` pointing to your **Minikube IP** (`minikube ip`).
-- Run `kubectl describe ingress hello-api` to check rules.
+- Run `kubectl -n hello describe ingress hello-api` to check rules.
 
 ---
 
@@ -44,7 +44,7 @@ They are also required for the **Horizontal Pod Autoscaler (HPA)** to function.
 
 - The service name must match the deployment label (`hello-api`).
 - Ensure pods are running and ready.
-- Use `kubectl get endpoints hello-api` to confirm pods are attached.
+- Use `kubectl -n hello get endpoints hello-api` to confirm pods are attached.
 
 ---
 
@@ -61,8 +61,8 @@ They are also required for the **Horizontal Pod Autoscaler (HPA)** to function.
 If using self-signed certs:
 
 ```bash
-kubectl delete secret hello-tls
-kubectl create secret tls hello-tls --cert=tls.crt --key=tls.key
+kubectl -n hello delete secret hello-tls
+kubectl -n hello create secret tls hello-tls --cert=tls.crt --key=tls.key
 ```
 
 For production: use **cert-manager** to automate renewal.
@@ -74,9 +74,9 @@ For production: use **cert-manager** to automate renewal.
 Update the ConfigMap or Secret, then restart the deployment:
 
 ```bash
-kubectl apply -f k8s/manifests/configmap.yaml
-kubectl apply -f k8s/manifests/secret.yaml
-kubectl rollout restart deployment hello-api
+kubectl -n hello apply -f k8s/manifests/configmap.yaml
+kubectl -n hello apply -f k8s/manifests/secret.yaml
+kubectl -n hello rollout restart deployment hello-api
 ```
 
 ---
@@ -94,7 +94,7 @@ The same workflow applies to most FastAPI/Flask/Node apps.
 To remove all resources:
 
 ```bash
-kubectl delete -f k8s/manifests/
+kubectl -n hello delete -f k8s/manifests/
 ```
 
 Or delete the entire namespace:

@@ -13,8 +13,8 @@ The HPA watches Pod metrics (CPU/Memory) and adjusts the number of replicas in y
 Quick check:
 
 ```bash
-kubectl top nodes
-kubectl top pods -n hello
+kubectl -n hello top nodes
+kubectl -n hello top pods
 ```
 
 Expected: You should see CPU/Memory usage numbers. If you see errors about metrics not being available, fix metrics-server before continuing.
@@ -40,9 +40,9 @@ resources:
 If you had to add or change these, reapply and roll the Deployment:
 
 ```bash
-kubectl apply -f k8s/manifests/deployment.yaml
-kubectl rollout restart deploy/hello-app
-kubectl rollout status deploy/hello-app
+kubectl -n hello apply -f k8s/manifests/deployment.yaml
+kubectl -n hello rollout restart deploy/hello-app
+kubectl -n hello rollout status deploy/hello-app
 ```
 
 ---
@@ -79,14 +79,14 @@ spec:
 Apply it:
 
 ```bash
-kubectl apply -f k8s/manifests/hpa.yaml
+kubectl -n hello apply -f k8s/manifests/hpa.yaml
 ```
 
 Verify:
 
 ```bash
-kubectl get hpa -n hello
-kubectl describe hpa hello-app-hpa -n hello
+kubectl -n hello get hpa
+kubectl -n hello describe hpa hello-app-hpa
 ```
 
 Expected (example):
@@ -144,7 +144,7 @@ hey -z 2m -c 50 -host hello.local https://$MINIKUBE_IP/
 In another terminal:
 
 ```bash
-watch kubectl get hpa,deploy,pods -n hello
+watch kubectl -n hello get hpa,deploy,pods
 ```
 
 *In order to watch multiple resources at once, we use watch instead of `-w` as it will not allow you to watch multiple resources.*
@@ -168,8 +168,7 @@ Expected behavior:
 You can also create an HPA without a manifest using the imperative command:
 
 ```bash
-kubectl autoscale deploy hello-app \
-  --namespace hello \
+kubectl -n hello autoscale deploy hello-app \
   --cpu-percent=70 \
   --min=1 \
   --max=5
@@ -183,7 +182,7 @@ kubectl autoscale deploy hello-app \
 
 - **No metrics available**
   ```bash
-  kubectl top pods -n hello
+  kubectl -n hello top pods
   kubectl -n kube-system logs deploy/metrics-server
   ```
 - **HPA never scales**
@@ -191,7 +190,7 @@ kubectl autoscale deploy hello-app \
   - Verify your load actually hits the app (check Pod logs, Service, and Endpoints).
   - Check HPA events:
     ```bash
-    kubectl describe hpa hello-app-hpa -n hello
+    kubectl -n hello describe hpa hello-app-hpa
     ```
 
 ---

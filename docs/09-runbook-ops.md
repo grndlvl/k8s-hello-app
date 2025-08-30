@@ -10,14 +10,14 @@ Use it as a quick reference during day-to-day operations or incident response.
 Verify pods are running and ready:
 
 ```bash
-kubectl get pods -l app=hello-api
-kubectl describe pod <pod-name>
+kubectl -n hello get pods -l app=hello-api
+kubectl -n hello describe pod <pod-name>
 ```
 
 Check logs:
 
 ```bash
-kubectl logs -l app=hello-api
+kubectl -n hello logs -l app=hello-api
 ```
 
 Health endpoint:
@@ -33,8 +33,8 @@ curl http://hello.local/healthz
 Sometimes a quick restart clears transient issues:
 
 ```bash
-kubectl rollout restart deployment hello-api
-kubectl get pods -w
+kubectl -n hello rollout restart deployment hello-api
+kubectl -n hello get pods -w
 ```
 
 ---
@@ -44,8 +44,8 @@ kubectl get pods -w
 To temporarily override HPA:
 
 ```bash
-kubectl scale deployment hello-api --replicas=3
-kubectl get pods -l app=hello-api
+kubectl -n hello scale deployment hello-api --replicas=3
+kubectl -n hello get pods -l app=hello-api
 ```
 
 ---
@@ -55,8 +55,8 @@ kubectl get pods -l app=hello-api
 Check metrics (requires metrics-server):
 
 ```bash
-kubectl top pods -l app=hello-api
-kubectl top nodes
+kubectl -n hello top pods -l app=hello-api
+kubectl -n hello top nodes
 ```
 
 ---
@@ -66,9 +66,9 @@ kubectl top nodes
 After updating config or secrets:
 
 ```bash
-kubectl apply -f k8s/manifests/configmap.yaml
-kubectl apply -f k8s/manifests/secret.yaml
-kubectl rollout restart deployment hello-api
+kubectl -n hello apply -f k8s/manifests/configmap.yaml
+kubectl -n hello apply -f k8s/manifests/secret.yaml
+kubectl -n hello rollout restart deployment hello-api
 ```
 
 ---
@@ -78,14 +78,14 @@ kubectl rollout restart deployment hello-api
 Verify ingress is routing:
 
 ```bash
-kubectl describe ingress hello-api
+kubectl -n hello describe ingress hello-api
 curl -v http://hello.local
 ```
 
 Check service endpoints:
 
 ```bash
-kubectl get endpoints hello-api
+kubectl -n hello get endpoints hello-api
 ```
 
 ---
@@ -95,11 +95,11 @@ kubectl get endpoints hello-api
 If using self-signed certs, regenerate and update the secret:
 
 ```bash
-kubectl delete secret hello-tls
-kubectl create secret tls hello-tls \
+kubectl -n hello delete secret hello-tls
+kubectl -n hello create secret tls hello-tls \
   --cert=tls.crt \
   --key=tls.key
-kubectl rollout restart deployment hello-api
+kubectl -n hello rollout restart deployment hello-api
 ```
 
 👉 In production: prefer **cert-manager** for auto-renewal.
@@ -111,7 +111,7 @@ kubectl rollout restart deployment hello-api
 Run a debug pod:
 
 ```bash
-kubectl run -it debug --image=busybox --restart=Never -- sh
+kubectl -n hello run -it debug --image=busybox --restart=Never -- sh
 ```
 
 Inside:
@@ -128,22 +128,22 @@ nslookup hello-api
 To tear down the app completely:
 
 ```bash
-kubectl delete -f k8s/manifests/
+kubectl -n hello delete -f k8s/manifests/
 ```
 
 Or nuke the namespace:
 
 ```bash
-kubectl delete ns hello
+kubectl -n hello delete ns hello
 ```
 
 ---
 
 ## 10. Common Incident Response
 
-- **Pod crash loops** → check logs (`kubectl logs`) and events (`kubectl describe pod`).
+- **Pod crash loops** → check logs (`kubectl -n hello logs`) and events (`kubectl -n hello describe pod`).
 - **No traffic** → verify ingress, hosts entry, and service endpoints.
-- **High latency / 5xx** → check resource usage with `kubectl top` and consider scaling.
+- **High latency / 5xx** → check resource usage with `kubectl -n hello top` and consider scaling.
 - **TLS failure** → check `hello-tls` secret and certificate expiration.
 
 ---
