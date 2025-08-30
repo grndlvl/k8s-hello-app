@@ -123,7 +123,7 @@ go install github.com/rakyll/hey@latest
 If you mapped `hello.local` in `/etc/hosts`:
 
 ```bash
-hey -z 2m -c 50 http://hello.local/
+hey -z 2m -c 50 https://hello.local/
 ```
 
 If you did **not** edit `/etc/hosts`:
@@ -144,8 +144,11 @@ hey -z 2m -c 50 -host hello.local http://$MINIKUBE_IP/
 In another terminal:
 
 ```bash
-kubectl get hpa,deploy,pods -n hello -w
+watch kubectl get hpa,deploy,pods -n hello
 ```
+
+*In order to watch multiple resources at once, we use watch instead of `-w` as it will not allow you to watch multiple resources.*
+*Press `Ctrl+C` to stop watching when done.*
 
 Expected behavior:
 - `TARGETS` rises toward/above your utilization target (e.g., 60–70%).  
@@ -195,8 +198,8 @@ kubectl autoscale deploy hello-app \
 
 ## ✅ What we accomplished
 
-- Added an **HPA** that scales `hello-app` between **1–5** replicas targeting **70% CPU**.  
-- Verified scaling behavior under load and cooldown back to 1 replica.
+- Added an **HPA** that scales `hello-app` between **2–5** replicas targeting **70% CPU**.  
+- Verified scaling behavior under load and cooldown back to 2 replica.
 
 ---
 
