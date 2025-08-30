@@ -130,7 +130,7 @@ If you did **not** edit `/etc/hosts`:
 
 ```bash
 MINIKUBE_IP=$(minikube ip)
-hey -z 2m -c 50 -host hello.local http://$MINIKUBE_IP/
+hey -z 2m -c 50 -host hello.local https://$MINIKUBE_IP/
 ```
 
 - `-z 2m` → run for 2 minutes  
